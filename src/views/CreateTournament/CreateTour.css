@@ -16,9 +16,9 @@ body {
     width: 80%;
     color: #F3950D;
     font-size: 23px;
-    text-align:left;
-    position : absolute;
-    left:10%;
+    text-align: left;
+    position: absolute;
+    left: 10%;
     bottom: 15%;
 }
 
@@ -31,49 +31,107 @@ body {
     border-radius: 20px;
     box-shadow: 0 25px 50px rgba(250, 172, 29, 0.15);
 }
+
 .form-Ct .slogan {
-    width: 100%;
+    /* width: 100%;
     margin: 0 auto;
     margin-bottom:50px;
     color: #F3950D;
     background-color: #222732;
     font-size: 16px;
     border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-right-radius: 20px; */
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: -15px;
+    top: -15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
 }
-.form-Ct .slogan i{
-    font-size: 20px;
-}
-.form-Ct .form-input{
-    margin-left: 70px;
-}
-.form-Ct .form-input .form-title{ 
-    display:flex;
-    margin-bottom: 50px;
-}
-.form-Ct .form-input .form-title label{
-    color: #fff;
-} 
 
-.form-Ct .form-input .form-title .title{
+.form-Ct .slogan::before {
+    content: "you are champion ";
+    position: absolute;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center !important;
+    line-height: 3;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    width: 160%;
+    height: 60px;
+    background-color: #F3950D;
+    transform: rotate(-45deg) translateY(-30px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-Ct .slogan::after {
+    content: '';
+    position: absolute;
+    bottom : 0 ;
+    left : 0 ;
+    width: 15px;
+    height: 15px;
+    background-color: #a57128;
+    z-index: -1;
+    box-shadow: 235px -235px #a57128;
+}
+
+.form-Ct .form-input {
+    position: absolute;
+    top: 111px;
+    left: 130px;
+}
+
+.form-Ct .form-input .form-title {
+    display: flex;
+    margin-bottom: 50px;
+    position: relative;
+}
+.form-Ct .form-input .form-title small {
+    position : absolute;
+    bottom:-10px;
+    left:253px;
+    color: red; 
+    font-size: 13px;
+}
+.form-Ct .form-input .form-title label {
+    color: #fff;
+}
+
+.form-Ct .form-input .form-title .title {
     width: 200px;
-    margin-right:50px;
+    margin-right: 50px;
     text-align: left;
     color: #fff;
 
-} 
-.form-Ct .form-input .form-title .title span{ 
-    color:red;
 }
+
+.form-Ct .form-input .form-title .title span {
+    color: red;
+}
+
 .btn-CreatT {
     background-color: #F3950D !important;
     color: #fff !important;
 }
 
 #demo-helper-text-aligned-no-helper {
-    color: #fff ;
-    text-align:left;
+    color: #fff;
+    text-align: left;
 }
+
 #datetime-local {
     color: #fff;
+}
+#check-cutstom {
+    color: black;
+}
+.check-cutstom b{
+    color: #fff !important;
 }

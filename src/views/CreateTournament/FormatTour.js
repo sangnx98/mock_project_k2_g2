@@ -4,12 +4,12 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-export default function FormTour() {
-    const [age, setAge] = React.useState('')
+export default function FormatTour() {
+    const [Format, setFormat] = React.useState('')
     const [open, setOpen] = React.useState(false)
 
     const handleChange = (event) => {
-        setAge(event.target.value)
+        setFormat(event.target.value)
     }
 
     const handleClose = () => {
@@ -21,8 +21,8 @@ export default function FormTour() {
     }
 
     return (
-        <div>
-            <FormControl sx={{minWidth: 600 }}>
+        <>
+            <FormControl sx={{ minWidth: 600 }} >
                 <InputLabel id='demo-controlled-open-select-label' color='warning'>Format</InputLabel>
                 <Select
                     labelId='demo-controlled-open-select-label'
@@ -30,19 +30,17 @@ export default function FormTour() {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={age}
+                    value={Format}
                     label='Format'
                     color='warning'
                     onChange={handleChange}
+                    
                 >
-                    <MenuItem value=''>
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Single Elimination</MenuItem>
-                    <MenuItem value={20}>Double Elimination</MenuItem>
-                    <MenuItem value={30}>Free For All</MenuItem>
-                </Select>
+                    <MenuItem value='Single Elimination' >Single Elimination</MenuItem>
+                    <MenuItem value='Leaderboard' >Leaderboard</MenuItem>
+                    
+                </Select>          
             </FormControl>
-        </div>
+        </>
     )
 }
