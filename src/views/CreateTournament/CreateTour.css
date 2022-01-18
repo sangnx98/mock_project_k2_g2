@@ -135,3 +135,6 @@ body {
 .check-cutstom b{
     color: #fff !important;
 }
+.small-description {
+    bottom: -30px !important;
+}

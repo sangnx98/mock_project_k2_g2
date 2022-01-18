@@ -1,15 +1,29 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react'
 import './CreateTour.css'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import FormatTour from './FormatTour'
+import { TextField, Button, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import StartTime from './StartTime'
 import { useForm } from 'react-hook-form'
 // import MaxPartic from './MaxPartic'
 const Createtournament = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = data => console.log(data)
+
+    // Format Tour
+    const [Format, setFormat] = React.useState('')
+    const [open, setOpen] = React.useState(false)
+
+    const handleChange = (event) => {
+        setFormat(event.target.value)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    const handleOpen = () => {
+        setOpen(true)
+    }
     return (
         <>
             <div className='bg-Ct'>
@@ -61,8 +75,26 @@ const Createtournament = () => {
 
                         <div className='form-title'>
                             <div className='title'><b>Format</b> <span>*</span> :</div>
-                            <FormatTour {...register('item', { required: true })}/>
-                            {errors?.item?.select === 'None' && <small>Format is required !</small>}
+                            <FormControl sx={{ minWidth: 600 }} >
+                                <InputLabel id='demo-controlled-open-select-label' color='warning'>Format</InputLabel>
+                                <Select
+                                    labelId='demo-controlled-open-select-label'
+                                    id='demo-helper-text-aligned-no-helper'
+                                    open={open}
+                                    onClose={handleClose}
+                                    onOpen={handleOpen}
+                                    value={Format}
+                                    label='Format'
+                                    color='warning'
+                                    onChange={handleChange}
+
+                                >
+                                    <MenuItem value='Single Elimination'  {...register('Format', { required: true })}>Single Elimination</MenuItem>
+                                    <MenuItem value='Leaderboard'  {...register('Format', { required: true })}>Leaderboard</MenuItem>
+
+                                </Select>
+                            </FormControl>
+                            {errors?.Format?.type === 'required' && <small className='small-description'>Format is required !</small>}
 
                         </div>
 
@@ -78,8 +110,8 @@ const Createtournament = () => {
                                 rows={4}
 
                             />
-                            {errors?.nameTour?.type === 'maxLength' && (
-                                <small>Maximum length 256 characters !</small>
+                            {errors?.Description?.type === 'maxLength' && (
+                                <small className='small-description'>Maximum length 256 characters !</small>
                             )}
                         </div>
 
