@@ -1,10 +1,15 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react'
 import './CreateTour.css'
-import { TextField, Button, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import {
+    TextField, Button, InputLabel, MenuItem, FormControl, Select,
+    Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
+} from '@mui/material'
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
 import StartTime from './StartTime'
 import { useForm } from 'react-hook-form'
 // import MaxPartic from './MaxPartic'
+const filter = createFilterOptions()
 const Createtournament = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = data => console.log(data)
@@ -24,6 +29,40 @@ const Createtournament = () => {
     const handleOpen = () => {
         setOpen(true)
     }
+    //Game 
+    const [valueG, setValueG] = React.useState(null)
+    const [openG, toggleOpenG] = React.useState(false)
+
+    const handleCloseG = () => {
+        setDialogValueG({
+            title: '',
+            year: '',
+        })
+
+        toggleOpenG(false)
+    }
+
+    const [dialogValueG, setDialogValueG] = React.useState({
+        title: '',
+        year: '',
+    })
+
+    const handleSubmitG = (event) => {
+        event.preventDefault()
+        setValueG({
+            title: dialogValueG.title,
+            year: parseInt(dialogValueG.year, 10),
+        })
+
+        handleCloseG()
+    }
+    const topGames = [
+        { title: 'League of Legends'},
+        { title: 'CrossFire'},
+        { title: 'PUBG'},
+        { title: 'Teamfight Tactics'},
+    ]
+
     return (
         <>
             <div className='bg-Ct'>
@@ -35,9 +74,8 @@ const Createtournament = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='form-Ct'>
                     <div className='slogan'>
-                        {/* <h1>Practice winning every day </h1>
-                    <i className='fa fa-handshake-o' aria-hidden='true'></i> */}
                     </div>
+                    {/* Tournament name */}
                     <div className='form-input'>
                         <div className='form-title'>
                             <div className='title'><b>Tournament Name</b> <span>*</span> :</div>
@@ -60,19 +98,104 @@ const Createtournament = () => {
                             )}
 
                         </div>
+
+                        {/* Game */}
                         <div className='form-title'>
                             <div className='title'><b>Game</b> <span>*</span> :</div>
-                            <TextField
-                                sx={{ minWidth: 600 }}
-                                helperText=' '
-                                color='warning'
-                                id='demo-helper-text-aligned-no-helper'
-                                label='Game'
-                                {...register('Game', { required: true })}
+                            <Autocomplete
+                                value={valueG}
+                                onChange={(event, newValueG) => {
+                                    if (typeof newValueG === 'string') {
+                                        // timeout to avoid instant validation of the dialog's form.
+                                        setTimeout(() => {
+                                            toggleOpenG(true)
+                                            setDialogValueG({
+                                                title: newValueG,
+                                                year: '',
+                                            })
+                                        })
+                                    } else if (newValueG && newValueG.inputValue) {
+                                        toggleOpenG(true)
+                                        setDialogValueG({
+                                            title: newValueG.inputValue,
+                                            year: '',
+                                        })
+                                    } else {
+                                        setValueG(newValueG)
+                                    }
+                                }}
+                                filterOptions={(options, params) => {
+                                    const filtered = filter(options, params)
+
+                                    if (params.inputValue !== '') {
+                                        filtered.push({
+                                            inputValue: params.inputValue,
+                                            title: `Add "${params.inputValue}"`,
+                                        })
+                                    }
+
+                                    return filtered
+                                }}
+                                id='free-solo-dialog-demo'
+                                options={topGames}
+                                getOptionLabel={(option) => {
+                                    // e.g valueG selected with enter, right from the input
+                                    if (typeof option === 'string') {
+                                        return option
+                                    }
+                                    if (option.inputValue) {
+                                        return option.inputValue
+                                    }
+                                    return option.title
+                                }}
+                                selectOnFocus
+                                clearOnBlur
+                                handleHomeEndKeys
+                                renderOption={(props, option) => <li {...props}>{option.title}</li>}
+                                sx={{ width: 300 }}
+                                freeSolo
+                                renderInput={(params) => <TextField
+                                    {...params} 
+                                    label='Game'
+                                    sx={{ minWidth: 600 }}
+                                    color='warning'
+                                    {...register('Game', { required: true})}
+                                />}
+                                
                             />
-                            {errors?.Game?.type === 'required' && <small>Game is required !</small>}
+                            {errors?.Game?.type === 'required' && <small className='small-description'>Game is required !</small>}
+                            <Dialog open={openG} onClose={handleCloseG}>
+                                <form onSubmit={handleSubmitG}>
+                                    <DialogTitle>Add a new Game</DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            Did you miss any game in our list? Please, add it!
+                                        </DialogContentText>
+                                        <TextField
+                                            autoFocus
+                                            margin='dense'
+                                            id='name'
+                                            value={dialogValueG.title}
+                                            onChange={(event) =>
+                                                setDialogValueG({
+                                                    ...dialogValueG,
+                                                    title: event.target.valueG,
+                                                })
+                                            }
+                                            label='title'
+                                            type='text'
+                                            variant='standard'
+                                        />
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleCloseG}>Cancel</Button>
+                                        <Button type='submit'>Add</Button>
+                                    </DialogActions>
+                                </form>
+                            </Dialog>
                         </div>
 
+                        {/* Format */}
                         <div className='form-title'>
                             <div className='title'><b>Format</b> <span>*</span> :</div>
                             <FormControl sx={{ minWidth: 600 }} >
@@ -98,6 +221,7 @@ const Createtournament = () => {
 
                         </div>
 
+                        {/* Description */}
                         <div className='form-title'>
                             <div className='title'><b>Description</b> :</div>
                             <TextField
@@ -115,20 +239,9 @@ const Createtournament = () => {
                             )}
                         </div>
 
+                        {/* Start-Time */}
                         <div className='form-title'>
                             <div className='title'><b>Start-Time</b> <span>*</span> :</div>
-                            {/* <TextField
-
-                            sx={{ minWidth: 600 }}
-                            id='datetime-local'
-                            label='Start-Time'
-                            color='warning'
-                            type='datetime-local'
-                            defaultValue='2019-09-19T19:19'
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        /> */}
                             <StartTime />
                         </div>
                         {/* <div className='form-title'>
