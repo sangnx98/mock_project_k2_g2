@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react'
-import '../../assets/styles/CreateTour.css'
+import './CreateTour.css'
 import {
     TextField, Button, InputLabel, MenuItem, FormControl, Select,
     Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
