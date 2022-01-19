@@ -12,7 +12,9 @@ import { useForm } from 'react-hook-form'
 const filter = createFilterOptions()
 const Createtournament = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const onSubmit = data => console.log(data)
+    const onSubmit = (data) => {
+        console.log(JSON.stringify(data))
+    }
 
     // Format Tour
     const [Format, setFormat] = React.useState('')
@@ -86,14 +88,14 @@ const Createtournament = () => {
                                 id='demo-helper-text-aligned-no-helper'
                                 label='Tournament Name'
                                 className='textField-custom'
-                                {...register('nameTour', { required: true, minLength: 3, maxLength: 32 })}
+                                {...register('name', { required: true, minLength: 3, maxLength: 32 })}
                             />
 
-                            {errors?.nameTour?.type === 'required' && <small>Tournament Name is required !</small>}
-                            {errors?.nameTour?.type === 'minLength' && (
+                            {errors?.name?.type === 'required' && <small>Tournament Name is required !</small>}
+                            {errors?.name?.type === 'minLength' && (
                                 <small>Minimum length of 3 characters !</small>
                             )}
-                            {errors?.nameTour?.type === 'maxLength' && (
+                            {errors?.name?.type === 'maxLength' && (
                                 <small>Maximum length 32 characters !</small>
                             )}
 
@@ -159,11 +161,11 @@ const Createtournament = () => {
                                     label='Game'
                                     sx={{ minWidth: 600 }}
                                     color='warning'
-                                    {...register('Game', { required: true})}
+                                    {...register('game_name', { required: true})}
                                 />}
                                 
                             />
-                            {errors?.Game?.type === 'required' && <small className='small-description'>Game is required !</small>}
+                            {errors?.game_name?.type === 'required' && <small className='small-description'>Game is required !</small>}
                             <Dialog open={openG} onClose={handleCloseG}>
                                 <form onSubmit={handleSubmitG}>
                                     <DialogTitle>Add a new Game</DialogTitle>
@@ -210,14 +212,14 @@ const Createtournament = () => {
                                     label='Format'
                                     color='warning'
                                     onChange={handleChange}
-
+                                    
                                 >
-                                    <MenuItem value='Single Elimination'  {...register('Format', { required: true })}>Single Elimination</MenuItem>
-                                    <MenuItem value='Leaderboard'  {...register('Format', { required: true })}>Leaderboard</MenuItem>
+                                    <MenuItem value='Single Elimination'  {...register('format', { required: true })}>Single Elimination</MenuItem>
+                                    <MenuItem value='Leaderboard'  {...register('format', { required: true })}>Leaderboard</MenuItem>
 
                                 </Select>
                             </FormControl>
-                            {errors?.Format?.type === 'required' && <small className='small-description'>Format is required !</small>}
+                            {errors?.format?.type === 'required' && <small className='small-description'>Format is required !</small>}
 
                         </div>
 
@@ -230,11 +232,11 @@ const Createtournament = () => {
                                 sx={{ minWidth: 600 }}
                                 label='Description'
                                 multiline
-                                {...register('Description', { minLength: 0, maxLength: 256 })}
+                                {...register('description', { minLength: 0, maxLength: 256 })}
                                 rows={4}
 
                             />
-                            {errors?.Description?.type === 'maxLength' && (
+                            {errors?.description?.type === 'maxLength' && (
                                 <small className='small-description'>Maximum length 256 characters !</small>
                             )}
                         </div>
