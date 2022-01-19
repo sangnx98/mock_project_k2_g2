@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import CreateTour from './views/CreateTournament/CreateTour'
+import CreateTour from './pages/TournamentListPage/CreateTour'
 
 function App() {
     return (
