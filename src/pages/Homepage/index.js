@@ -12,7 +12,7 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 
-const Home = () => {
+const Homepage = () => {
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
 
@@ -106,4 +106,4 @@ const Home = () => {
         </div>
     )
 }
-export default Home
+export default Homepage
