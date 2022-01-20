@@ -1,4 +1,5 @@
 import * as React from 'react'
+import logo from '../../assets/images/Logo.png'
 import AppBar from '@mui/material/AppBar'
 import { styled, alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -16,7 +17,9 @@ import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
 const pages = ['Tournament', 'Events', 'Community']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
-import './navigation.css'
+import './index.css'
+
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -91,7 +94,7 @@ const NavigationBar = () => {
                     ></Typography>
                     <a href='#' alt='Logo'>
                         <img
-                            src='/logo.png'
+                            src={logo}
                             alt='Logo'
                             className='navbar_logo'
                         ></img>
