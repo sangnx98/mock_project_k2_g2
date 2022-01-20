@@ -1,5 +1,4 @@
 import React from 'react'
-import './index.css'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -11,6 +10,8 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
+
+import './index.css'
 
 const Homepage = () => {
     const [game, setGame] = React.useState('')
