@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 
 
-export default function ColumnsGrid() {
+export default function Landingpage() {
     return (
         <>
             <div className='banner  content-center '>
@@ -20,7 +20,7 @@ export default function ColumnsGrid() {
                     </div>
                     <Stack spacing={1} direction='row' style={{ display: 'flex' , justifyContent: 'center' }} >                   
                         <Button  sx={{ minWidth: 250 }}
-                            className='btn-CreatT'
+                            className='btn-create-tou'
                             type='submit'>
                             Create Tournamets Now
                         </Button>
