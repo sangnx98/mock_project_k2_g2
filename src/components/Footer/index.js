@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import './index.css'
 import footerbanner from '../../assets/images/footerbanner.png'
 
-
 const FooterInner = () => {
     return (
         <div className='footer'>
@@ -31,4 +30,4 @@ const FooterInner = () => {
     )
 }
 
-export default FooterInner 
+export default FooterInner

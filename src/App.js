@@ -1,23 +1,16 @@
 import React from 'react'
-import './App.css'
-import NavigationBar from './components/navigationBar/navigationBar'
-import FooterInner from './components/footer/footerInner'
-import Home from './views/homepage/home'
-
-
-
-
+import Homepage from './pages/Homepage'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import './assets/styles/app.css'
 
 function App() {
     return (
         <div className='App'>
-            <NavigationBar/>
-            <Home/>
-            <FooterInner/>
+            <Header/>
+            <Homepage/>
+            <Footer/>
         </div>
     )
 }
-
-
-
 export default App
