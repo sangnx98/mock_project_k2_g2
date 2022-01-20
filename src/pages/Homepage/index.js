@@ -68,9 +68,9 @@ const Homepage = () => {
                 </div>    
                 <div className='section-featured-content'>
                     <Box sx={{ flexGrow: 1 ,display: { xs: '1', md: 'flex' } }}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 8, md: 12 }}>
-                            {Array.from(Array(6)).map((_, index) => (
-                                <Grid item xs={1} sm={3} md={4} key={index}>
+                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 6, md: 12 }}>
+                            {Array.from(Array(12)).map((_, index) => (
+                                <Grid item xs={1} sm={2} md={3} key={index}>
                                     <div className='box-content' >
                                         <div className = 'box-content-img'>
                                             <img src='https://www.mobafire.com/images/champion/skins/landscape/jayce-arcane-762x.jpg'  className='img-content'></img>
