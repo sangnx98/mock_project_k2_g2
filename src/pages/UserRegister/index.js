@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import GoogleIcon from '@mui/icons-material/Google'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import { useForm } from 'react-hook-form'
+import '../UserLogin/index'
 
 function Copyright(props) {
     return (
@@ -27,7 +28,7 @@ function Copyright(props) {
   
 const theme = createTheme()
 
-export default function Login() {
+export default function Register() {
     const {register, handleSubmit, formState:{ errors }} = useForm()
     const onSubmit = (data) => console.log(data)
 
