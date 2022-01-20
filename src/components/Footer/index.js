@@ -6,7 +6,7 @@ import footerbanner from '../../assets/images/footerbanner.png'
 const FooterInner = () => {
     return (
         <div className='footer'>
-            <Box className='footer-left' sx={{  display: { xs: 'none', md: 'flex' } }} >
+            <Box className='footer-left' sx={{  display: { xs: 'none', md: 'none' , xl: 'flex' } }} >
                 <div className='footer-left-content'>
                     <div className='footer-desc-content' >
                         <a href='#' className='link-desc-content' >PRESS</a>
