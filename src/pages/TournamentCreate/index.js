@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react'
-import './index.css'
+
 import {
     TextField, Button, InputLabel, MenuItem, FormControl, Select,
     Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
@@ -14,8 +13,10 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DateTimePicker from '@mui/lab/DateTimePicker'
 import Stack from '@mui/material/Stack'
 
+import './index.css'
+
 const filter = createFilterOptions()
-const Createtournament = () => {
+const TournamentCreate = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = (data) => {
         console.log(JSON.stringify(data))
@@ -280,4 +281,4 @@ const Createtournament = () => {
     )
 }
 
-export default Createtournament
+export default TournamentCreate
