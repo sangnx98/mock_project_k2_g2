@@ -1,16 +1,15 @@
 import React from 'react'
-import Homepage from './pages/Homepage'
-import Header from './components/Header'
+import MatchDetail from './pages/MatchDetail'
 import Footer from './components/Footer'
-import Landing from './pages/Landingpage'
+// import Header from './components/Header'
+
 
 function App() {
     return (
         <div className='App'>
-            <Landing />
-            <Header/>
-            <Homepage/>
+            <MatchDetail/>
             <Footer/>
+            {/* <Header/> */}
         </div>
     )
 }
