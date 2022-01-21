@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    background-color: #222222;
+}
+
+.box-1 {
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background: #576179;
+    color: #ffff;
+}
+
+
+.box-1 ul {
+    display: inline-flex;
+    list-style: none;
+}
+
+.box-1 ul li {
+    width: 300px;
+    padding: 15px;
+    text-align: center;
+}
+
+h1 {
+    color: #ffff;
+}
