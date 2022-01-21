@@ -2,7 +2,7 @@ import React from 'react'
 
 import './index.css'
 
-export default function PlayerList() {
+export default function RequestQueue() {
     return (
         <div className='tournament-participant-list'>
             <div className='tournament-participant-list-item'>

@@ -5,8 +5,8 @@
     display: flex;
     justify-content: space-around;
     font-family: 'Roboto', sans-serif;
-    top: 54rem;
-    left: 11rem;
+    top: 27rem !important;
+    left: 16rem;
 }
 .tournament-match-hisory{
     width: 66rem;
