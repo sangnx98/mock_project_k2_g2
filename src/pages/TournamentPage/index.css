@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+.tournament-detail-page{
+  background-color: #21252F;
+  position: relative;
+  min-height: 100vh;
+}
+
+.tournament-detail-page-banner{
+  width: 100%;
+  height: 60vh;
+  background-color: #E68E10;
+  background-image: url('https://timelinecovers.pro/facebook-cover/download/video-game-league-of-legends-zed-facebook-cover.jpg');
+  background-size: cover;
+}
+
+/*--------- Tournament Tabs Menu ----------*/
+
+.tournament-tabs{
+  position: absolute;
+  padding: 5px 4rem;
+  height: 3.2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  top: 25rem;
+  left: 0;
+  width: 97.5rem !important;
+  background-color: #2B303D;
+}
+
+.tournament-tabs-items{
+  font-size: 30px;
+}
+
+.tournament-tabs-button{
+  font-family: 'Roboto', sans-serif;
+  width: 18rem;
+  height: 2.7rem;
+  background-color: #E68E10;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/*-------Tounament Intro--------*/
+.tournament-page-intro{
+  position: absolute;
+  top: 30rem;
+  left: 9rem;
+}
+
+.tournament-intro{
+  display: flex;
+  padding: 40px;
+  background-color: #2B303D !important;
+  color: #FFFFFF !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.tournament-game-intro{
+  width: 66rem;
+}
+
+.tournament-intro-detail{
+  display: flex;
+  width: 65%;
+}
+
+.tournament-intro-name{
+  font-size: 35px;
+  letter-spacing: 1.5px;
+}
+
+.tournament-intro-detail{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tournament-intro-item{
+  width: 10rem  ;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+.tournament-intro-item-icon{
+  margin-right: 0.3rem;
+}
+
+.tournament-intro-item-content{
+  font-size: 15px;
+}
+
+.tournament-intro-description{
+  font-size: 21px;
+  color: #E68E10;
+}
+
+.tournament-intro-description-detail{
+  width: 34rem;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.tournament-host{
+  display: flex;
+  flex-direction: column;
+}
+
+.tournament-host-detail{
+  display: flex;
+}
+
+.tournament-host-detail-avt{
+  width: 7rem;
+  height: 7rem;
+  background-color: black;
+  border-radius: 50%;
+  background-image: url('https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg');
+  background-size: cover;
+  margin-right: 20px;
+}
+
+.tournament-host-detail-item-p1{
+  font-size: 18px;
+}
+
+.tournament-host-detail-item-p2{
+  font-size: 18px;
+  color: #E68E10 ;
+}
+
+.tournament-host-button{
+  width: 16rem;
+  height: 3rem;
+  margin-top: 1.8rem;
+  background-color: #E68E10;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
