@@ -4,7 +4,6 @@
 .tournament-detail-page{
   background-color: #21252F;
   position: relative;
-  min-height: 100vh;
 }
 
 .tournament-detail-page-banner{
@@ -26,7 +25,7 @@
   align-items: center;
   top: 25rem;
   left: 0;
-  width: 97.5rem !important;
+  width: 87rem !important;
   background-color: #2B303D;
 }
 
@@ -46,11 +45,16 @@
   margin-right: 10px;
 }
 
+.tournament-page-tabs{
+  margin-top: 140px;
+}
+
 /*-------Tounament Intro--------*/
 .tournament-page-intro{
   position: absolute;
   top: 30rem;
   left: 9rem;
+  width: 77rem;
 }
 
 .tournament-intro{
@@ -62,12 +66,12 @@
 }
 
 .tournament-game-intro{
-  width: 66rem;
+  width: 100%;
 }
 
 .tournament-intro-detail{
   display: flex;
-  width: 65%;
+  width: 77%;
 }
 
 .tournament-intro-name{

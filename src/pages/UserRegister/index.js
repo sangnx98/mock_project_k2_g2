@@ -11,6 +11,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import GoogleIcon from '@mui/icons-material/Google'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import { useForm } from 'react-hook-form'
+
+import axios from 'axios'
+
 import '../UserLogin/index'
 
 function Copyright(props) {
@@ -30,17 +33,16 @@ const theme = createTheme()
 
 export default function Register() {
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data, e) => {
+        console.log('data onSubmit', data)
+        axios.post('https://61eace3e7ec58900177cda33.mockapi.io/users', {...data})
+            .then(res =>{
+                console.log('',res)
+                console.log('',res.data)
+                e.target.reset()
+            })
+    }
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault()
-    //     const data = new FormData(event.currentTarget)
-    //     // eslint-disable-next-line no-console
-    //     console.log({
-    //         email: data.get('email'),
-    //         password: data.get('password'),
-    //     })
-    // }
     return (
         <ThemeProvider theme={theme}>
             <Grid container component='main' sx={{ height: '100vh' }}>
@@ -125,24 +127,24 @@ export default function Register() {
                                     margin='normal'
                                     required
                                     fullWidth
-                                    id='displayName'
-                                    label='Display Name'
-                                    name='displayName'
+                                    id='username'
+                                    label='Username'
+                                    name='username'
                                     autoFocus
                                     {...register(
-                                        'displayName', {
-                                            required: 'Display Name must be filled',
+                                        'username', {
+                                            required: 'Username must be filled',
                                             minLength: {
                                                 value: 4,
-                                                message: 'Display Name must have at least 8 character'
+                                                message: 'Username must have at least 8 character'
                                             },
                                             maxLength: {
                                                 value: 16,
-                                                message: 'Display Name must have at least 8 character',
+                                                message: 'Username must have at least 8 character',
                                             }
                                         })}
-                                    error ={!!errors.displayName}
-                                    helperText={errors?.displayName ? errors.displayName.message : null}
+                                    error ={!!errors.username}
+                                    helperText={errors?.username ? errors.username.message : null}
                                 />
                                 <br/>
                                 <Button

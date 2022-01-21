@@ -80,18 +80,6 @@ export default function TournamentPage() {
                             <Tab style={styles.tab} label='Setting' {...a11yProps(3)} />
                         </Tabs>
                     </Box>
-                    <TabPanel value={value} index={0}>
-                        <MatchHistory/>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <MatchHistory/>
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        <Participant/>
-                    </TabPanel>
-                    <TabPanel value={value} index={3}>
-                        <Participant/>
-                    </TabPanel>
                     <div >
                         <button className='tournament-tabs-button'>Start Tournament</button>
                     </div>
@@ -155,6 +143,21 @@ export default function TournamentPage() {
                         </div>
                     </Paper>
                 </Box>
+                <Box className='tournament-page-tabs'>
+                    <TabPanel value={value} index={0}>
+                        <Participant/>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <MatchHistory/>
+                    </TabPanel>
+                    <TabPanel value={value} index={2}>
+                        <Participant/>
+                    </TabPanel>
+                    <TabPanel value={value} index={3}>
+                        <Participant/>
+                    </TabPanel>
+                </Box>
+                
             </div>
         </>
     )
