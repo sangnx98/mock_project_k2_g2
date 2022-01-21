@@ -1,17 +1,24 @@
 import React from 'react'
-import Homepage from './pages/Homepage'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Landing from './pages/Landingpage'
+import './App.css'
 
 function App() {
     return (
         <div className='App'>
-            <Landing />
-            <Header/>
-            <Homepage/>
-            <Footer/>
+            <header className='App-header'>
+                <p>
+                    Edit <code>src/App.js</code> and save to reload.
+                </p>
+                <a
+                    className='App-link'
+                    href='https://reactjs.org'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    Learn React
+                </a>
+            </header>
         </div>
     )
 }
+
 export default App
