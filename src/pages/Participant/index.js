@@ -5,10 +5,11 @@ import TabsUnstyled from '@mui/base/TabsUnstyled'
 import TabsListUnstyled from '@mui/base/TabsListUnstyled'
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled'
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
+import TabPanelUnstyled from '@mui/base/TabPanelUnstyled'
 
 import './index.css'
 
-// import PlayerList from '../PlayerList'
+import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
 
 const blue = {
@@ -62,6 +63,12 @@ const Tab = styled(TabUnstyled)`
   }
 `
 
+const TabPanel = styled(TabPanelUnstyled)`
+  width: 100%;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+`
+
 const TabsList = styled(TabsListUnstyled)`
   width: 22rem;
   background-color: #21252F;
@@ -93,10 +100,10 @@ export default function Participant() {
                             <Tab>Player List</Tab>
                             <Tab>Request list</Tab>
                         </TabsList>
+                        <TabPanel value={0}><PlayerList/></TabPanel>
+                        <TabPanel value={1}><RequestQueue/></TabPanel>
                     </TabsUnstyled>
                 </div>
-                {/* <PlayerList/> */}
-                <RequestQueue/>
             </div>
         </div>
     )
