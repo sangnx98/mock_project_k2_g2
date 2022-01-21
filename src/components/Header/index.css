@@ -1,0 +1,26 @@
+
+
+/* *{
+ color: black !important;
+ font-weight: bold !important;
+} */
+
+.appBar{
+  background-color: #6d717b !important;
+   opacity: 0.8
+}
+
+
+.navbar_logo{
+  max-width: 40;
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.menu-appbar-item  p {
+  color: black
+}
+
+.navbar-search{
+  margin-right: 40px;
+}
