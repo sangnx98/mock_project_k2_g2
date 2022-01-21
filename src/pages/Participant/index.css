@@ -1,16 +1,13 @@
 .tournament-participant-root{
-    position: absolute;
     display: flex;
     justify-content: space-around;
     font-family: 'Roboto', sans-serif;
     top: 27rem;
-    left: 16rem;
+    left: 12rem;
 }
 
 .tournament-participant{
     width: 66rem;
-    height: 100vh;
-    background-color: #21252F;
     display: flex;
     flex-direction: column;
     padding: 40px;

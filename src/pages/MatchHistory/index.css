@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 .tournament-match-hisory-root{
-    position: absolute;
     display: flex;
     justify-content: space-around;
     font-family: 'Roboto', sans-serif;
     top: 27rem !important;
-    left: 16rem;
+    left: 12rem;
 }
 .tournament-match-hisory{
     width: 66rem;
-    height: 100vh;
-    background-color: #21252F;
     display: flex;
     padding: 40px;
     color: white;
@@ -21,13 +18,11 @@
     display: flex;
     flex-direction: column;
     width: 66rem;
-
 }
 
 .tournament-match-hisory-detail{
     display: flex;
     flex-direction: column;
-
 }
 
 .tournament-match-hisory-detail-group-name{
