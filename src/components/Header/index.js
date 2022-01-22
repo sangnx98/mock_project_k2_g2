@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {Link} from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import { styled, alpha } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -14,7 +15,6 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
-const pages = ['Tournament', 'Events', 'Community']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 import './index.css'
 
@@ -60,7 +60,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }))
 
-const Header = () => {
+// eslint-disable-next-line react/prop-types
+const Header = ({loginState}) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
 
@@ -89,13 +90,13 @@ const Header = () => {
                         component='div'
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     ></Typography>
-                    <a href='#' alt='Logo'>
+                    <Link to='/'><a href='#' alt='Logo'>
                         <img
                             src='/logo.png'
                             alt='Logo'
                             className='navbar_logo'
                         ></img>
-                    </a>
+                    </a></Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size='large'
@@ -125,26 +126,22 @@ const Header = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign='center' color='inherit'>
-                                        {page}{' '}
-                                    </Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem>
+                                <Typography textAlign='center' color='inherit'>
+                                    Tournaments
+                                </Typography>
+                            </MenuItem>
+
                         </Menu>
                     </Box>
 
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} style={{ marginLeft:10}}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
+                        <Link to='/tournaments'>
+                            <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                                Tournaments
                             </Button>
-                        ))}
+                        </Link>
                     </Box>
                     <Search className='navbar-search' sx={{
                         display: { xs: 'none', md: 'flex' },    
@@ -157,38 +154,58 @@ const Header = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title='Open settings'>
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar
-                                    alt='Profile Image'
-                                    src='https://static2.yan.vn/YanNews/2167221/202106/nguoi-bo-bi-an-cua-jisoo-blackpink-quen-biet-toan-sao-noi-tieng-17cf6363.jpg'
-                                />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id='menu-appbar'
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign='center'>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+
+                    {(loginState == true)? 
+                        (<Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title='Open settings'>
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar
+                                        alt='Profile Image'
+                                        src='https://static2.yan.vn/YanNews/2167221/202106/nguoi-bo-bi-an-cua-jisoo-blackpink-quen-biet-toan-sao-noi-tieng-17cf6363.jpg'
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id='menu-appbar'
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                                        <Typography textAlign='center'>{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>) : (
+                            <div>
+                                <Link to='/user/register'><Button
+                                    key='register'
+                                    variant='text'
+                                    sx={{ color: 'white'}}
+                                >
+                                    Register
+                                </Button></Link>
+                                <Link to='/user/login'><Button
+                                    key='login'
+                                    variant='contained'
+                                    sx={{ color: 'white', backgroundColor:'orange', '&:hover':{backgroundColor:'orange'}}}
+                                >
+                                    Login
+                                </Button></Link>
+                            </div>
+                            
+                        )}
                 </Toolbar>
             </Container>
         </AppBar>
