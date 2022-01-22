@@ -10,8 +10,8 @@ const FooterInner = () => {
                 <div className='footer-left-content'>
                     <div className='footer-desc-content' >
                         <a href='#' className='link-desc-content' >PRESS</a>
-                        <a href='#' className='link-desc-content' >SECURYTY</a>
-                        <a href='#' className='link-desc-content' >TEAM OF SERVICE</a>
+                        <a href='#' className='link-desc-content' >SECURITY</a>
+                        <a href='#' className='link-desc-content' >TERMS OF SERVICE</a>
                         <a href='#' className='link-desc-content' >PLAYER SUPPORT</a>
                     </div>
                     <div>
