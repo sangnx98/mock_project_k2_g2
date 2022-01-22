@@ -1,12 +1,12 @@
 import './index.css'
 import * as React from 'react'
+import {Link} from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import Banner from '../../components/Banner/index'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-
 
 export default function Landingpage() {
     return (
@@ -16,14 +16,15 @@ export default function Landingpage() {
                 <div className='banner-title '>
                     <div className='title '>
                         <h1 className='title-h1'>Simplify Tournament Management</h1>
-                        <h3 className='content-center'>Join the millions who trust Challonge to manage their tournaments.<br /> More than 28,575,585 brackets created around the world.</h3>
+                        <h3 className='content-center'>Join the millions who trust us to manage their tournaments.<br /> More than 28,575,585 brackets created around the world.</h3>
                     </div>
                     <Stack spacing={1} direction='row' style={{ display: 'flex' , justifyContent: 'center' }} >                   
-                        <Button  sx={{ minWidth: 250 }}
+                        <Link to='/tournaments/create'><Button  sx={{ minWidth: 250 }}
                             className='btn-create-tou'
                             type='submit'>
-                            Create Tournamets Now
-                        </Button>
+                            Create Tournaments Now
+                        </Button></Link>
+                        
                     </Stack>
                 </div>
             </div>

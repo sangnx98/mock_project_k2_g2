@@ -10,13 +10,24 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
+import axios from 'axios'
+
+// eslint-disable-next-line no-undef
+const CHALLONGE_API_KEY = process.env.REACT_APP_CHALLONGE_API_KEY
 
 import './index.css'
 
-const Homepage = () => {
+const getData = () =>{
+    axios.get('https://api.challonge.com/v1/tournaments.json?api_key='+ CHALLONGE_API_KEY)
+        .then(res =>{
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+}
+
+const TournamentList = () => {
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
-
 
     const handleChange = (event) => {
         setGame(event.target.value)
@@ -27,10 +38,12 @@ const Homepage = () => {
 
     return (
         <div className='section-body'>
+
+            <button onClick={()=>getData()}>Click me</button>
             <Container maxWidth='xl'>
                 <div section className='section-body-title' >
                     <div className='section-title-left'>
-                        <h1>Our Game</h1>
+                        <h1>Our Games</h1>
                     </div>
                     <div className='section-title-right'>
                         <Box sx={{ minWidth: 120 ,  display: { xs: 'none', md: 'flex' } }} >
@@ -43,7 +56,7 @@ const Homepage = () => {
                                     label='Age'
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value='abc'>CSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGO</MenuItem>
+                                    <MenuItem value='abc'>CSGO</MenuItem>
                                     <MenuItem value={20}>CSGO1</MenuItem>
                                     <MenuItem value={30}>CSGO2</MenuItem>
                                 </Select>
@@ -107,4 +120,4 @@ const Homepage = () => {
         </div>
     )
 }
-export default Homepage
+export default TournamentList
