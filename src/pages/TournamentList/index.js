@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, {useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
+import { AppContext } from '../../contexts/globalContext'
 import {Link} from 'react-router-dom'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
@@ -16,25 +17,13 @@ import './index.css'
 
 import {ref, child, get} from 'firebase/database'
 
-import db from '../../configs/firebaseConfig'
-const dbRef = ref(db)
-
 const TournamentList = () => {
+    const { tournaments, getTournaments } = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
-    // eslint-disable-next-line no-unused-vars
-    const [tournamentData, getTournamentData] = React.useState('')
 
     useEffect(() => {
-        get(child(dbRef, 'tournaments/')).then((snapshot)=>{
-            if(snapshot.exists()){
-                getTournamentData(snapshot.val())
-            } else{
-                console.log('No data found')
-            }
-        }).catch(err =>{
-            console.error('DB Error: ' + err)
-        })
+        getTournaments()
     }, [])
 
     const handleChange = (event) => {
@@ -88,7 +77,7 @@ const TournamentList = () => {
                 <div className='section-featured-content'>
                     <Box sx={{ flexGrow: 1 ,display: { xs: '1', md: 'flex' } }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 6, md: 12 }}>
-                            {Object.keys(tournamentData).map(itemId=>{
+                            {Object.keys(tournaments).map(itemId=>{
                                 return(                                    
                                     <Grid item xs={1} sm={2} md={3} key={itemId}>
                                         <div className='box-content'>  
@@ -97,23 +86,23 @@ const TournamentList = () => {
                                             </div>
                                             <div className = 'box-content-decs'>
                                                 <div>
-                                                    <Link to={'/tournaments/'+ itemId} >{tournamentData[itemId].name}</Link>
+                                                    <Link to={'/tournaments/'+ itemId} >{tournaments[itemId].name}</Link>
                                                 </div>
                                                 <div className = 'desc-content number'>
                                                     <PersonRoundedIcon/>
-                                                    <a>{tournamentData[itemId].participantCount} người tham gia</a>
+                                                    <a>{tournaments[itemId].participantCount} người tham gia</a>
                                                 </div>
                                                 <div className = 'desc-content formula'>
                                                     <EmojiEventsRoundedIcon/>
-                                                    <a>Thể thức: {tournamentData[itemId].format}</a>
+                                                    <a>Thể thức: {tournaments[itemId].format}</a>
                                                 </div>
                                                 <div className = 'desc-content game'>
                                                     <VideogameAssetRoundedIcon/>
-                                                    <a>Game: {tournamentData[itemId].gameId}</a>
+                                                    <a>Game: {tournaments[itemId].gameId}</a>
                                                 </div>
                                                 <div className = 'desc-content date'>
                                                     <EventNoteRoundedIcon/>
-                                                    <a>Thời gian: {tournamentData[itemId].startAt}</a>
+                                                    <a>Thời gian: {tournaments[itemId].startAt}</a>
                                                 </div>
                                             </div>
                                         </div>
