@@ -15,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
+import {useSelector} from 'react-redux'
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 import './index.css'
 
@@ -62,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // eslint-disable-next-line react/prop-types
 const Header = ({loginState}) => {
+    const user = useSelector(state => state.auth.user)
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
 
@@ -79,7 +81,7 @@ const Header = ({loginState}) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
     }
-
+    console.log('islogin', loginState)
     return (
         <AppBar position='fixed' className='appBar'>
             <Container maxWidth='xl'>
@@ -161,7 +163,7 @@ const Header = ({loginState}) => {
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar
                                         alt='Profile Image'
-                                        src='https://static2.yan.vn/YanNews/2167221/202106/nguoi-bo-bi-an-cua-jisoo-blackpink-quen-biet-toan-sao-noi-tieng-17cf6363.jpg'
+                                        src={user.avatarURL}
                                     />
                                 </IconButton>
                             </Tooltip>
