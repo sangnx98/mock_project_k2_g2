@@ -18,12 +18,13 @@ import './index.css'
 import {ref, child, get} from 'firebase/database'
 
 const TournamentList = () => {
-    const { tournaments, getTournaments } = useContext(AppContext)
+    const { tournaments, getTournaments, getUserLogged } = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
 
     useEffect(() => {
-        getTournaments()
+        getTournaments(),
+        getUserLogged()
     }, [])
 
     const handleChange = (event) => {

@@ -11,14 +11,9 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import GoogleIcon from '@mui/icons-material/Google'
-import FacebookIcon from '@mui/icons-material/Facebook'
-
-import { toast } from 'react-toastify'
 
 import '../UserLogin/index'
 import { AppContext } from '../../contexts/globalContext'
-
 
 function Copyright(props) {
     return (
@@ -34,11 +29,10 @@ function Copyright(props) {
 }
   
 const theme = createTheme()
-toast.configure()
 
 export default function Register() {
     const {  users, writeDataTable, getUser } = React.useContext(AppContext)
-    const history = useNavigate()
+    const navigate = useNavigate()
     const {register, handleSubmit, formState:{ errors }} = useForm()
 
     const onSubmit = (data, e) => {
@@ -57,7 +51,7 @@ export default function Register() {
             }else{
                 newUser.push({ id, password, username, email, avatarURL })
                 writeDataTable(newUser, 'users')
-                history('/user/login')
+                navigate('/user/login')
                 break
             }
         }
@@ -177,27 +171,10 @@ export default function Register() {
                                 >
                                     Create
                                 </Button>
-                                <div className='btn-login-social'>
-                                    <Button 
-                                        className='btn btn-social'
-                                        type='submit'
-                                        variant='contained'
-                                        sx={{ mt: 3, mb: 2 }}
-                                    >
-                                        <FacebookIcon/>
-                                    </Button>
-                                    <Button 
-                                        className='btn btn-social btn-google'
-                                        type='submit'
-                                        variant='contained'
-                                        sx={{ mt: 3, mb: 2 }}
-                                    >
-                                        <GoogleIcon/>
-                                    </Button>
-                                </div>
+                                
                                 <Grid container>
                                     <Grid item>
-                                        <Link href='#' variant='body2'>
+                                        <Link href='/user/login' variant='body2'>
                                             {'If you have an account? Login'}
                                         </Link>
                                     </Grid>

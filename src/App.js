@@ -10,16 +10,12 @@ import Landingpage from './pages/Landingpage'
 import UserRegister from './pages/UserRegister'
 import UserLogin from './pages/UserLogin'
 import TournamentCreate from './pages/TournamentCreate'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { AppContext } from './contexts/globalContext'
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
     return (
         <div className='App'>
             <AppContextProvider>
-                <Header loginState={isLoggedIn}/>
+                <Header/>
                 <Routes>
                     <Route exact path='/' element={<Landingpage/>}/>
                     <Route path='/user/register' element={<UserRegister/>}/>
@@ -29,7 +25,6 @@ function App() {
                     <Route path='/tournaments/create' element={<TournamentCreate/>}/>
                 </Routes>
                 <Footer/>
-                <ToastContainer/>
             </AppContextProvider>
         </div>
     )

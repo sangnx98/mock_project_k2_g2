@@ -36,7 +36,6 @@ const AppContextProvider = ({ children }) => {
             if (snapshot.exists()) {
                 setUser(snapshot.val())
                 console.log('users', snapshot.val())
-
             } else {
                 console.log('No data available')
             }
