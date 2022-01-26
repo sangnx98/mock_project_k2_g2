@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Routes, Route} from 'react-router-dom'
 import AppContextProvider from './contexts/globalContext'
 import Header from './components/Header'
@@ -13,8 +14,11 @@ import UserLogin from './pages/UserLogin'
 import TournamentCreate from './pages/TournamentCreate'
 =======
 import MatchDetail from './pages/MatchDetail'
+=======
+import TournamentEdit from './pages/TournamentEdit'
+>>>>>>> 6673d01 (display static Edit Tournament)
 import Footer from './components/Footer'
-// import Header from './components/Header'
+import Header from './components/Header'
 
 >>>>>>> 9df4795 (display static match detail)
 
@@ -23,6 +27,7 @@ function App() {
 
     return (
         <div className='App'>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <AppContextProvider>
                 <Header loginState={isLoggedIn}/>
@@ -44,6 +49,12 @@ function App() {
             <Footer/>
             {/* <Header/> */}
 >>>>>>> 9df4795 (display static match detail)
+=======
+            <Header />
+            <TournamentEdit />
+            <Footer />
+
+>>>>>>> 6673d01 (display static Edit Tournament)
         </div>
     )
 }
