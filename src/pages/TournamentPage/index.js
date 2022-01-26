@@ -1,4 +1,3 @@
-import * as React from 'react'
 import MatchHistory from '../MatchHistory'   
 import Banner from '../../components/Banner'
 import Participant from '../Participant'
@@ -14,6 +13,11 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
+import React, {useContext, useEffect} from 'react'
+import { AppContext } from '../../contexts/globalContext'
+import { useParams } from 'react-router-dom'
+
+
 
 const styles = {
     tab: {
@@ -56,7 +60,15 @@ function a11yProps(index) {
 
 
 export default function TournamentPage() {
+    const { id } = useParams()
     const [value, setValue] = React.useState(0)
+    const { tournaments, getTournaments,  } = useContext(AppContext)
+
+    useEffect(() => {
+        getTournaments()
+
+    },[])
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -98,50 +110,60 @@ export default function TournamentPage() {
                         }
                     }}
                 >
+                    
                     <Paper
                         className='tournament-intro'
                         elevation={3}
-                    >
-                        <div className='tournament-game-intro'>
-                            <label className='tournament-intro-name'>League Of Kid Academy</label>
-                            <div className='tournament-intro-detail'>
-                                <div className='tournament-intro-item'>
-                                    <PermIdentityIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>2 nguoi choi</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <EmojiEventsIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>Single Elimination</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <SportsEsportsIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>Apex Legends</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <AccessTimeIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>January 20 2022</p>
-                                </div>
-                            </div>
-                            <div className='tournament-intro-description'>
-                                <p>Description</p>
-                            </div>
-                            <div className='tournament-intro-description-detail'>
-                                <p>Giống với chuyện trứng có trước hay gà có trước, tranh luận về việc nên tập trung quyền lực nhiều hơn cho trung ương hay nên phân quyền nhiều hơn cho các địa phương thường rất khó khăn (và không phải bao giờ cũng có ích). </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='tournament-host'>
-                                <div className='tournament-host-detail'>
-                                    <img className='tournament-host-detail-avt'></img>
-                                    <div className='tournament-host-detail-item'>
-                                        <p className='tournament-host-detail-item-p1'>Organized by</p>
-                                        <p className='tournament-host-detail-item-p2'>ptlinh239</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button className='tournament-host-button'>Share</button>
-                        </div>
+                    >  
+                        {Object.keys(tournaments).map(tournamentsId => {
+                            if(id == tournamentsId){
+                                return(
+                                    <React.Fragment key={tournamentsId}>
+                                        <div className='tournament-game-intro' >
+                                            <label className='tournament-intro-name'> {(id == tournamentsId) ? tournaments[tournamentsId].name : '' }</label>
+                                            <div className='tournament-intro-detail'>
+                                                <div className='tournament-intro-item'>
+                                                    <PermIdentityIcon className='tournament-intro-item-icon' />
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].participantCount} người chơi</p>
+                                                </div>
+                                                <div className='tournament-intro-item'>
+                                                    <EmojiEventsIcon className='tournament-intro-item-icon' />
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].format}</p>
+                                                </div>
+                                                <div className='tournament-intro-item'>
+                                                    <SportsEsportsIcon className='tournament-intro-item-icon' />
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].gameId}</p>
+                                                </div>
+                                                <div className='tournament-intro-item'>
+                                                    <AccessTimeIcon className='tournament-intro-item-icon' />
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].startAt}</p>
+                                                </div>
+                                            </div>
+                                            <div className='tournament-intro-description'>
+                                                <p>Description</p>
+                                            </div>
+                                            <div className='tournament-intro-description-detail'>
+                                                <p>{tournaments[tournamentsId].description}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className='tournament-host'>
+                                                <div className='tournament-host-detail'>
+                                                    <img className='tournament-host-detail-avt'></img>
+                                                    <div className='tournament-host-detail-item'>
+                                                        <p className='tournament-host-detail-item-p1'>Organized by</p>
+                                                        <p className='tournament-host-detail-item-p2'>ptlinh239</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button className='tournament-host-button'>Share</button>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            }
+                        })}
                     </Paper>
+                    
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>

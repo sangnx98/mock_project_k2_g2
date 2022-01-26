@@ -18,19 +18,20 @@ export default function PlayerList() {
         <>
             {Object.keys(participants).map(participantID => {
                 return(
-                    // eslint-disable-next-line react/jsx-key
-                    <div className='tournament-participant-list'>
-                        <div className='tournament-participant-list-item'>
-                            <p>{participants[participantID].name}</p>
-                            <div className='list-item-button'>
-                                <button className='list-item-button-common'>Edit</button>
-                                <button className='list-item-button-common'
-                                    onClick={()=>onSubmit(participantID)}>
-                                    Delete
-                                </button>
+                    <React.Fragment key={participantID}>
+                        <div className='tournament-participant-list'>
+                            <div className='tournament-participant-list-item'>
+                                <p>{participants[participantID].name}</p>
+                                <div className='list-item-button'>
+                                    <button className='list-item-button-common'>Edit</button>
+                                    <button className='list-item-button-common'
+                                        onClick={()=>onSubmit(participantID)}>
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </React.Fragment>
                 )
             })}
             
