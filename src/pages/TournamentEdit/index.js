@@ -1,40 +1,67 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import {
     TextField, Button, InputLabel, MenuItem, FormControl, Select,
     Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
 } from '@mui/material'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
 import { useForm } from 'react-hook-form'
-
+import db from '../../configs/firebaseConfig'
 //TimePicker
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DateTimePicker from '@mui/lab/DateTimePicker'
 import Stack from '@mui/material/Stack'
-
 import './index.css'
+// eslint-disable-next-line no-unused-vars
+import { ref, child, get, push, set } from 'firebase/database'
+// eslint-disable-next-line no-undef
+// const CHALLONGE_API_KEY = process.env.REACT_APP_API_KEY
 
 const filter = createFilterOptions()
-const TournamentCreate = () => {
+const TournamentEdit = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = (data) => {
         console.log(JSON.stringify(data))
     }
+
     // API 
-    useEffect(() => {
-        const getTour = async () => {
-            try {
-                const res = await axios.get(
-                    'https://api.challonge.com/v1/tournaments.json'
-                )
-                console.log(res.data)
-            } catch (error) {
-                console.log(error.message)
-            }
+    const [name, setName] = React.useState('')
+    const [description, setDescription] = React.useState('')
+
+    function handleEdit() {
+        if (name, description, Format == '') {
+            handleSubmit(onSubmit)
+        } else {
+            set(ref(db, 'tournaments/-MuGg_NrXnPGrQTgv79f'), {
+                name: name,
+                description: description,
+                participantCount: '',
+                format: Format,
+                gameId: 888888,
+                hostId: 123123,
+                startAt: '11/01/2022 11:11'
+
+            })
+                .then(() => {
+                    alert('Update sucess !')
+                })
+                .catch(err => {
+                    alert(err, 'Update failed !')
+                })
+
         }
-        getTour()
-    },[])
+    }
+    const handleOnChangeName = (e) => {
+        setName(e.target.value)
+    }
+    const handleOnChangeDescription = (e) => {
+        setDescription(e.target.value)
+    }
+
+
+
+
+
     // Format Tour
     const [Format, setFormat] = React.useState('')
     const [open, setOpen] = React.useState(false)
@@ -103,6 +130,8 @@ const TournamentCreate = () => {
                                 label='Tournament Name'
                                 className='textField-custom'
                                 {...register('name', { required: true, minLength: 3, maxLength: 32 })}
+                                value={name}
+                                onChange={handleOnChangeName}
                             />
 
                             {errors?.name?.type === 'required' && <small>Tournament Name is required !</small>}
@@ -236,7 +265,6 @@ const TournamentCreate = () => {
                             {errors?.format?.type === 'required' && <small className='small-description'>Format is required !</small>}
 
                         </div>
-
                         {/* Description */}
                         <div className='form-title'>
                             <div className='title'><b>Description</b> :</div>
@@ -248,6 +276,8 @@ const TournamentCreate = () => {
                                 multiline
                                 {...register('description', { minLength: 0, maxLength: 256 })}
                                 rows={4}
+                                value={description}
+                                onChange={handleOnChangeDescription}
 
                             />
                             {errors?.description?.type === 'maxLength' && (
@@ -277,6 +307,7 @@ const TournamentCreate = () => {
                             sx={{ minWidth: 250 }}
                             className='btn-EditT'
                             type='submit'
+                            onClick={handleEdit}
                         >
                             Edit Tournament
                         </Button>
@@ -288,4 +319,4 @@ const TournamentCreate = () => {
     )
 }
 
-export default TournamentCreate
+export default TournamentEdit

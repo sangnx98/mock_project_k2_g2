@@ -1,16 +1,5 @@
-body{
-    background-color: #1f1f1f;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-}
-
 
 .wrapper {
-
-    background-color: #1f1f1f;
     color: #f9f9f9;
     z-index: 0;
     padding-top: 100px;
@@ -30,7 +19,7 @@ body{
 }
 
 
-h1 {
+.title-h1 {
     font-size: 4.5rem;
 }
 
@@ -56,7 +45,7 @@ h1 {
 }
 
 
-.box-image titletwo {
+.box-image .titletwo {
     position: absolute;
     max-width: 100%;
     width: auto;
@@ -104,17 +93,23 @@ h1 {
     left: 30px;
 }
 
-.banner-title {
+.banner-title{
     max-width: 100%;
     position: absolute;
-    top: 10px;
+    top: 50px;
     z-index: 0;
     color: #fff;
 }
 
 
-button {
-    background-color: coral !important;
+.btn-create-tou {
+    background-color: #F3950D !important;
+    color: #fff      !important;
+
 }
 
+.content-center{
+    display: flex !important;
+    justify-content: center !important;
+}
 

@@ -1,0 +1,38 @@
+.tournament-participant-root{
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    top: 27rem;
+    left: 12rem;
+}
+
+.tournament-participant{
+    width: 66rem;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    color: white;
+}
+
+.tournament-participant-add-member{
+    display: flex;
+    color: white;
+}
+
+.tournament-participant-text-box{
+    width: 15rem;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.tournament-participant-button{
+    background-color: #E68E10 !important;
+    margin-left: 20px !important;
+    color: white !important;
+    font-weight: 700 !important;
+}
+
+.tournament-participant-tabs{
+    color: #fff !important;
+}
+

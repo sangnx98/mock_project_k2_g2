@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+.tournament-match-hisory-root{
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    top: 27rem !important;
+    left: 12rem;
+}
+.tournament-match-hisory{
+    width: 66rem;
+    display: flex;
+    padding: 40px;
+    color: white;
+}
+
+.tournament-match-hisory-group{
+    display: flex;
+    flex-direction: column;
+    width: 66rem;
+}
+
+.tournament-match-hisory-detail{
+    display: flex;
+    flex-direction: column;
+}
+
+.tournament-match-hisory-detail-group-name{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.tournament-match-hisory-detail-group-matches{
+    display: flex;
+    flex-direction: column;
+    width: 66rem;
+}
+
+.tournament-match-hisory-detail-group-match1{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: #576179;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+.tournament-match-hisory-detail-group-match2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: #2B303D;
+    margin-bottom: 4rem;
+    border-radius: 5px;
+}
+
+.group-match-team{
+    display: flex;
+    justify-content: space-between;
+    width: 30rem;
+    margin-right: 15rem;
+}
+
+.group-match-team-name{
+    font-weight: 800;
+}
