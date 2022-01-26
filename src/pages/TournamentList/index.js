@@ -15,6 +15,7 @@ import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import './index.css'
 
+<<<<<<< HEAD
 
 import {ref, child, get} from 'firebase/database'
 
@@ -25,6 +26,15 @@ const TournamentList = () => {
 
  
     
+=======
+import {ref, child, get} from 'firebase/database'
+
+const TournamentList = () => {
+    const { tournaments, getTournaments } = useContext(AppContext)
+    const [game, setGame] = React.useState('')
+    const [startAt, setStartAt] = React.useState('')
+
+>>>>>>> 63e32394cc46ce303cc6c38b4d5b6ccaadcd1fa6
     useEffect(() => {
         getTournaments()
     }, [])
