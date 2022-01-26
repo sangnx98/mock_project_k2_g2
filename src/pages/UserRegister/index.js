@@ -1,4 +1,10 @@
 import * as React from 'react'
+import {useDispatch} from 'react-redux'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
+import axios from 'axios'
+
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -10,11 +16,12 @@ import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import GoogleIcon from '@mui/icons-material/Google'
 import FacebookIcon from '@mui/icons-material/Facebook'
-import { useForm } from 'react-hook-form'
 
-import axios from 'axios'
+import { toast } from 'react-toastify'
+
 
 import '../UserLogin/index'
+// import { Zoom } from '@mui/material'
 
 function Copyright(props) {
     return (
@@ -30,19 +37,21 @@ function Copyright(props) {
 }
   
 const theme = createTheme()
+toast.configure()
 
 export default function Register() {
+    const dispatch = useDispatch()
+    const history = useNavigate()
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const onSubmit = (data, e) => {
-        console.log('data onSubmit', data)
-        axios.post('https://61eace3e7ec58900177cda33.mockapi.io/users', {...data})
+    const onSubmit = (data) => {
+        axios.post('https://61eace3e7ec58900177cda33.mockapi.io/users', {...data, avatarURL: 'https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-anh-girl-xinh-toc-ngan-de-thuong.jpg'})
             .then(res =>{
                 console.log('',res)
                 console.log('',res.data)
-                e.target.reset()
+                dispatch({type: 'SIGNUP_SUCCESS'})
+                history('/user/login')
             })
     }
-
     return (
         <ThemeProvider theme={theme}>
             <Grid container component='main' sx={{ height: '100vh' }}>
@@ -176,7 +185,7 @@ export default function Register() {
                                 <Grid container>
                                     <Grid item>
                                         <Link href='#' variant='body2'>
-                                            {'If you have an account? Sign Up'}
+                                            {'If you have an account? Login'}
                                         </Link>
                                     </Grid>
                                 </Grid>

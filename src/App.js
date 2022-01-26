@@ -12,13 +12,10 @@ import UserLogin from './pages/UserLogin'
 import TournamentCreate from './pages/TournamentCreate'
 
 function App() {
-    const [isLoggedIn] = React.useState(false)
-
     return (
         <div className='App'>
             <AppContextProvider>
-                <Header loginState={isLoggedIn}/>
-
+                <Header/>
                 <Routes>
                     <Route exact path='/' element={<Landingpage/>}/>
                     <Route path='/user/register' element={<UserRegister/>}/>
@@ -27,10 +24,8 @@ function App() {
                     <Route path={'/tournaments/:id'} element={<TournamentPage/>}/>
                     <Route path='/tournaments/create' element={<TournamentCreate/>}/>
                 </Routes>
-
                 <Footer/>
             </AppContextProvider>
-            
         </div>
     )
 }
