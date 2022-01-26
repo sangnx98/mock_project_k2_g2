@@ -1,9 +1,6 @@
 import * as React from 'react'
-import {useDispatch} from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-
-import axios from 'axios'
 
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -19,9 +16,9 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 
 import { toast } from 'react-toastify'
 
-
 import '../UserLogin/index'
-// import { Zoom } from '@mui/material'
+import { AppContext } from '../../contexts/globalContext'
+
 
 function Copyright(props) {
     return (
@@ -40,18 +37,34 @@ const theme = createTheme()
 toast.configure()
 
 export default function Register() {
-    const dispatch = useDispatch()
+    const {  users, writeDataTable, getUser } = React.useContext(AppContext)
     const history = useNavigate()
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const onSubmit = (data) => {
-        axios.post('https://61eace3e7ec58900177cda33.mockapi.io/users', {...data, avatarURL: 'https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-anh-girl-xinh-toc-ngan-de-thuong.jpg'})
-            .then(res =>{
-                console.log('',res)
-                console.log('',res.data)
-                dispatch({type: 'SIGNUP_SUCCESS'})
+
+    const onSubmit = (data, e) => {
+        e.preventDefault()
+        const id = Date.now()
+        const password = data.password
+        const username = data.username
+        const email = data.email
+        const avatarURL = 'https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-anh-girl-xinh-toc-ngan-de-thuong.jpg'
+        const newUser = [...users]
+        
+        for(let i=0; i<newUser.length; i++){
+            if(newUser[i].email === email){
+                alert('Account exist')
+                break
+            }else{
+                newUser.push({ id, password, username, email, avatarURL })
+                writeDataTable(newUser, 'users')
                 history('/user/login')
-            })
+                break
+            }
+        }
     }
+    React. useEffect(() => {
+        getUser()
+    }, [])
     return (
         <ThemeProvider theme={theme}>
             <Grid container component='main' sx={{ height: '100vh' }}>
