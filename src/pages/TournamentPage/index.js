@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import MatchHistory from '../MatchHistory'   
-import Banner from '../../components/Banner'
-import Participant from '../Participant'
-=======
-import * as React from 'react'
 import MatchHistory from '../MatchHistory'   
 import Banner from '../../components/Banner'
 import Participant from '../Participant'
 import TournamentEdit from '../TournamentEdit'
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 import './index.css'
 
 import Box from '@mui/material/Box'
@@ -21,14 +14,11 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-<<<<<<< HEAD
 import React, {useContext, useEffect} from 'react'
 import { AppContext } from '../../contexts/globalContext'
 import { useParams } from 'react-router-dom'
 
 
-=======
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 
 const styles = {
     tab: {
@@ -71,7 +61,6 @@ function a11yProps(index) {
 
 
 export default function TournamentPage() {
-<<<<<<< HEAD
     const { id } = useParams()
     const [value, setValue] = React.useState(0)
     const { tournaments, getTournaments,  } = useContext(AppContext)
@@ -81,9 +70,6 @@ export default function TournamentPage() {
 
     },[])
 
-=======
-    const [value, setValue] = React.useState(0)
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -125,7 +111,6 @@ export default function TournamentPage() {
                         }
                     }}
                 >
-<<<<<<< HEAD
                     
                     <Paper
                         className='tournament-intro'
@@ -180,52 +165,6 @@ export default function TournamentPage() {
                         })}
                     </Paper>
                     
-=======
-                    <Paper
-                        className='tournament-intro'
-                        elevation={3}
-                    >
-                        <div className='tournament-game-intro'>
-                            <label className='tournament-intro-name'>League Of Kid Academy</label>
-                            <div className='tournament-intro-detail'>
-                                <div className='tournament-intro-item'>
-                                    <PermIdentityIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>2 nguoi choi</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <EmojiEventsIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>Single Elimination</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <SportsEsportsIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>Apex Legends</p>
-                                </div>
-                                <div className='tournament-intro-item'>
-                                    <AccessTimeIcon className='tournament-intro-item-icon'/>
-                                    <p className='tournament-intro-item-content'>January 20 2022</p>
-                                </div>
-                            </div>
-                            <div className='tournament-intro-description'>
-                                <p>Description</p>
-                            </div>
-                            <div className='tournament-intro-description-detail'>
-                                <p>Giống với chuyện trứng có trước hay gà có trước, tranh luận về việc nên tập trung quyền lực nhiều hơn cho trung ương hay nên phân quyền nhiều hơn cho các địa phương thường rất khó khăn (và không phải bao giờ cũng có ích). </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='tournament-host'>
-                                <div className='tournament-host-detail'>
-                                    <img className='tournament-host-detail-avt'></img>
-                                    <div className='tournament-host-detail-item'>
-                                        <p className='tournament-host-detail-item-p1'>Organized by</p>
-                                        <p className='tournament-host-detail-item-p2'>ptlinh239</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button className='tournament-host-button'>Share</button>
-                        </div>
-                    </Paper>
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>
@@ -238,11 +177,7 @@ export default function TournamentPage() {
                         <Participant/>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-<<<<<<< HEAD
-                        <Participant/>
-=======
                         <TournamentEdit/>
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
                     </TabPanel>
                 </Box>
                 

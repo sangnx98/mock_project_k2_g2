@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, useEffect} from 'react'
-=======
-import React from 'react'
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
+import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/system'
 import TabsUnstyled from '@mui/base/TabsUnstyled'
@@ -10,15 +6,9 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled'
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled'
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled'
-<<<<<<< HEAD
-import {ref, set, push} from 'firebase/database'
+import { ref, set, push } from 'firebase/database'
 import db from '../../configs/firebaseConfig'
 import './index.css'
-=======
-
-import './index.css'
-
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
 
@@ -91,76 +81,61 @@ const TabsList = styled(TabsListUnstyled)`
 `
 
 export default function Participant() {
-<<<<<<< HEAD
     const [name, setName] = useState('')
-    
-    
+
+
     useEffect(() => {
-    },)
+    })
 
     const onInputChange = (e) => {
         setName(e.target.value)
     }
 
- 
+
 
     const handleAdd = (e) => {
-     
+
         e.preventDefault()
         const participantRef = ref(db, 'participants/',)
         const addParticipant = push(participantRef)
-        set(addParticipant,  {
+        set(addParticipant, {
             name,
-            standingIndex : 0,
-            totalScore: 0   ,
+            standingIndex: 0,
+            totalScore: 0,
             tournamentId: 2374859,
         }).then(err => {
             console.log(err)
         })
     }
-    
-=======
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
+
 
     return (
         <div className='tournament-participant-root'>
             <div className='tournament-participant'>
-<<<<<<< HEAD
                 <form onSubmit={handleAdd} className='tournament-participant-add-member'>
-                    <input className='tournament-participant-text-box' 
-                        type='text' 
+                    <input className='tournament-participant-text-box'
+                        type='text'
                         placeholder='Player Name'
                         name='name'
                         value={name}
-                        onChange={onInputChange}/>
-                      
+                        onChange={onInputChange} />
+
                     <Button
-                        className='tournament-participant-button' 
+                        className='tournament-participant-button'
                         color='secondary'
                         onClick={handleAdd}
                     >
                         ADD
                     </Button>
                 </form>
-=======
-                <div className='tournament-participant-add-member'>
-                    <input className='tournament-participant-text-box' placeholder='Player Name'/>
-                    <Button
-                        className='tournament-participant-button' 
-                        color='secondary'
-                    >
-                        ADD
-                    </Button>
-                </div>
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
                             <Tab>Player List</Tab>
                             <Tab>Request list</Tab>
                         </TabsList>
-                        <TabPanel value={0}><PlayerList/></TabPanel>
-                        <TabPanel value={1}><RequestQueue/></TabPanel>
+                        <TabPanel value={0}><PlayerList /></TabPanel>
+                        <TabPanel value={1}><RequestQueue /></TabPanel>
                     </TabsUnstyled>
                 </div>
             </div>

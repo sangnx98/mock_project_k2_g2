@@ -15,7 +15,6 @@ import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import './index.css'
 
-<<<<<<< HEAD
 
 import {ref, child, get} from 'firebase/database'
 
@@ -26,15 +25,6 @@ const TournamentList = () => {
 
  
     
-=======
-import {ref, child, get} from 'firebase/database'
-
-const TournamentList = () => {
-    const { tournaments, getTournaments } = useContext(AppContext)
-    const [game, setGame] = React.useState('')
-    const [startAt, setStartAt] = React.useState('')
-
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
     useEffect(() => {
         getTournaments()
     }, [])

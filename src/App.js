@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import AppContextProvider from './contexts/globalContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -13,80 +10,26 @@ import Landingpage from './pages/Landingpage'
 import UserRegister from './pages/UserRegister'
 import UserLogin from './pages/UserLogin'
 import TournamentCreate from './pages/TournamentCreate'
-=======
-import MatchDetail from './pages/MatchDetail'
-=======
-import TournamentEdit from './pages/TournamentEdit'
->>>>>>> 6673d01 (display static Edit Tournament)
-import Footer from './components/Footer'
-import Header from './components/Header'
-
->>>>>>> 9df4795 (display static match detail)
-=======
-import {Routes, Route} from 'react-router-dom'
-import AppContextProvider from './contexts/globalContext'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import TournamentList from './pages/TournamentList'
-import TournamentPage from './pages/TournamentPage'
-import Landingpage from './pages/Landingpage'
-import UserRegister from './pages/UserRegister'
-import UserLogin from './pages/UserLogin'
-import TournamentCreate from './pages/TournamentCreate'
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 
 function App() {
     const [isLoggedIn] = React.useState(false)
 
     return (
-        <div className='App'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <AppContextProvider>
-                <Header loginState={isLoggedIn}/>
 
-                <Routes>
-                    <Route exact path='/' element={<Landingpage/>}/>
-                    <Route path='/user/register' element={<UserRegister/>}/>
-                    <Route path='/user/login' element={<UserLogin/>}/>
-                    <Route path='/tournaments' element={<TournamentList/>}/>
-                    <Route path={'/tournaments/:id'} element={<TournamentPage/>}/>
-                    <Route path='/tournaments/create' element={<TournamentCreate/>}/>
-                </Routes>
+        <AppContextProvider>
+            <Header loginState={isLoggedIn} />
 
-                <Footer/>
-            </AppContextProvider>
-            
-=======
-            <MatchDetail/>
-            <Footer/>
-            {/* <Header/> */}
->>>>>>> 9df4795 (display static match detail)
-=======
-            <Header />
-            <TournamentEdit />
+            <Routes>
+                <Route exact path='/' element={<Landingpage />} />
+                <Route path='/user/register' element={<UserRegister />} />
+                <Route path='/user/login' element={<UserLogin />} />
+                <Route path='/tournaments' element={<TournamentList />} />
+                <Route path={'/tournaments/:id'} element={<TournamentPage />} />
+                <Route path='/tournaments/create' element={<TournamentCreate />} />
+            </Routes>
+
             <Footer />
-
->>>>>>> 6673d01 (display static Edit Tournament)
-=======
-            <AppContextProvider>
-                <Header loginState={isLoggedIn}/>
-
-                <Routes>
-                    <Route exact path='/' element={<Landingpage/>}/>
-                    <Route path='/user/register' element={<UserRegister/>}/>
-                    <Route path='/user/login' element={<UserLogin/>}/>
-                    <Route path='/tournaments' element={<TournamentList/>}/>
-                    <Route path={'/tournaments/:id'} element={<TournamentPage/>}/>
-                    <Route path='/tournaments/create' element={<TournamentCreate/>}/>
-                </Routes>
-
-                <Footer/>
-            </AppContextProvider>
-            
->>>>>>> 6b423db (update branch and Create Edit Tournament with API)
-        </div>
+        </AppContextProvider>
     )
 }
 export default App
