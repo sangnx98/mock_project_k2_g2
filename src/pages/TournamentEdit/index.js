@@ -37,9 +37,9 @@ const TournamentEdit = () => {
                 description: description,
                 participantCount: '',
                 format: Format,
-                gameId: 888888,
+                gameId: 3828291,
                 hostId: 123123,
-                startAt: '11/01/2022 11:11'
+                startAt: Date()
 
             })
                 .then(() => {
