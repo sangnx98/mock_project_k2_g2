@@ -13,14 +13,13 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DateTimePicker from '@mui/lab/DateTimePicker'
 import Stack from '@mui/material/Stack'
-
 import './index.css'
 // eslint-disable-next-line no-unused-vars
 import { ref, child, get, push, set } from 'firebase/database'
 
 const filter = createFilterOptions()
 const TournamentCreate = () => {
-    const { register,handleSubmit ,formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = (data) => {
         console.log(JSON.stringify(data))
     }
@@ -31,9 +30,8 @@ const TournamentCreate = () => {
     const [name, setName] = React.useState('')
     const [description, setDescription] = React.useState('')
     const createTour = (e) => {
-        if (name , description , format == '') {
+        if (name, description, format == '') {
             handleSubmit(onSubmit)
-            alert(startAt)
         } else {
 
             e.preventDefault()
@@ -46,9 +44,10 @@ const TournamentCreate = () => {
                 gameId: 3333333,
                 hostId: 213123,
                 participantCount: '10',
-                startAt: startAt
+                startAt: Date()
             })
             alert('Create Success ')
+                
         }
 
     }
@@ -119,6 +118,7 @@ const TournamentCreate = () => {
     const handleChangeTime = (newValue) => {
         setStartAt(newValue)
     }
+    
     return (
         <>
             <div className='bg-Ct'>
@@ -324,6 +324,7 @@ const TournamentCreate = () => {
                             Create Tournament
 
                         </Button>
+
 
                     </div>
                 </div>
