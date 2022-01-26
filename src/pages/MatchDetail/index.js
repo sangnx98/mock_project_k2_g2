@@ -49,7 +49,7 @@ export default function index() {
     }
 
     return (
-        <>
+        <div className = 'form-matchdetail'>
 
             <div className='bannerMatch'>
                 <div className='name-page'>
@@ -206,6 +206,6 @@ export default function index() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque purus sit amet metus rhoncus, dictum pellentesque lectus semper. Suspendisse efficitur laoreet nibh, vitae tincidunt justo sodales at. Morbi lacinia arcu nec augue varius, eu congue justo ultricies. Aenean convallis sagittis magna quis volutpat. Integer vel ullamcorper dui, sit amet elementum tellus. Aenean finibus purus eget ipsum ornare lacinia. Aliquam vitae leo non ligula egestas auctor. Proin pulvinar turpis quis consequat varius. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce aliquam eros id dolor gravida suscipit.</p>
             </div>
 
-        </>
+        </div>
     )
 }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect} from 'react'
+=======
+import React from 'react'
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 import Button from '@mui/material/Button'
 import { styled } from '@mui/system'
 import TabsUnstyled from '@mui/base/TabsUnstyled'
@@ -6,9 +10,15 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled'
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled'
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled'
+<<<<<<< HEAD
 import {ref, set, push} from 'firebase/database'
 import db from '../../configs/firebaseConfig'
 import './index.css'
+=======
+
+import './index.css'
+
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
 
@@ -81,6 +91,7 @@ const TabsList = styled(TabsListUnstyled)`
 `
 
 export default function Participant() {
+<<<<<<< HEAD
     const [name, setName] = useState('')
     
     
@@ -108,10 +119,13 @@ export default function Participant() {
         })
     }
     
+=======
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)
 
     return (
         <div className='tournament-participant-root'>
             <div className='tournament-participant'>
+<<<<<<< HEAD
                 <form onSubmit={handleAdd} className='tournament-participant-add-member'>
                     <input className='tournament-participant-text-box' 
                         type='text' 
@@ -128,6 +142,17 @@ export default function Participant() {
                         ADD
                     </Button>
                 </form>
+=======
+                <div className='tournament-participant-add-member'>
+                    <input className='tournament-participant-text-box' placeholder='Player Name'/>
+                    <Button
+                        className='tournament-participant-button' 
+                        color='secondary'
+                    >
+                        ADD
+                    </Button>
+                </div>
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>

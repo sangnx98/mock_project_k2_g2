@@ -53,7 +53,11 @@
 .tournament-page-intro{
   position: absolute;
   top: 30rem;
+<<<<<<< HEAD
   left: 9rem;
+=======
+  left: 14rem;
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)
   width: 77rem;
 }
 
@@ -147,3 +151,9 @@
   font-size: 18px;
   font-weight: 600;
 }
+<<<<<<< HEAD
+=======
+.css-8atqhb {
+  width: 100% !important;
+}
+>>>>>>> 6b423db (update branch and Create Edit Tournament with API)

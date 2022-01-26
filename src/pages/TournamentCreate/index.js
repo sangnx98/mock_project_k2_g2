@@ -1,5 +1,6 @@
 import React from 'react'
-
+import db from '../../configs/firebaseConfig'
+// import { AppContext } from '../../contexts/globalContext'
 import {
     TextField, Button, InputLabel, MenuItem, FormControl, Select,
     Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
@@ -14,16 +15,62 @@ import DateTimePicker from '@mui/lab/DateTimePicker'
 import Stack from '@mui/material/Stack'
 
 import './index.css'
+// eslint-disable-next-line no-unused-vars
+import { ref, child, get, push, set } from 'firebase/database'
 
 const filter = createFilterOptions()
 const TournamentCreate = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register,handleSubmit ,formState: { errors } } = useForm()
     const onSubmit = (data) => {
         console.log(JSON.stringify(data))
     }
 
+
+
+    // API push tournament
+    const [name, setName] = React.useState('')
+    const [description, setDescription] = React.useState('')
+    const createTour = (e) => {
+        if (name , description , format == '') {
+            handleSubmit(onSubmit)
+            alert(startAt)
+        } else {
+
+            e.preventDefault()
+            const tourRef = ref(db, 'tournaments/')
+            const newTourRef = push(tourRef)
+            set(newTourRef, {
+                name,
+                description,
+                format,
+                gameId: 3333333,
+                hostId: 213123,
+                participantCount: '10',
+                startAt: startAt
+            })
+            alert('Create Success ')
+        }
+
+    }
+    const handleOnChangeName = (e) => {
+        setName(e.target.value)
+    }
+    const handleOnChangeDes = (e) => {
+        setDescription(e.target.value)
+    }
+
+    // API get Game
+    // const { games, getGames } = React.useContext(AppContext)
+    // React.useEffect(() => {
+    //     getGames()
+    // }, [])
+
+
+
+
+
     // Format Tour
-    const [Format, setFormat] = React.useState('')
+    const [format, setFormat] = React.useState('')
     const [open, setOpen] = React.useState(false)
 
     const handleChange = (event) => {
@@ -44,7 +91,6 @@ const TournamentCreate = () => {
     const handleCloseG = () => {
         setDialogValueG({
             title: '',
-            year: '',
         })
 
         toggleOpenG(false)
@@ -52,14 +98,12 @@ const TournamentCreate = () => {
 
     const [dialogValueG, setDialogValueG] = React.useState({
         title: '',
-        year: '',
     })
 
     const handleSubmitG = (event) => {
         event.preventDefault()
         setValueG({
             title: dialogValueG.title,
-            year: parseInt(dialogValueG.year, 10),
         })
 
         handleCloseG()
@@ -71,7 +115,10 @@ const TournamentCreate = () => {
         { title: 'Teamfight Tactics' },
     ]
     // Time 
-    const [valueT, setValueT] = React.useState(new Date())
+    const [startAt, setStartAt] = React.useState(new Date())
+    const handleChangeTime = (newValue) => {
+        setStartAt(newValue)
+    }
     return (
         <>
             <div className='bg-Ct'>
@@ -96,6 +143,8 @@ const TournamentCreate = () => {
                                 label='Tournament Name'
                                 className='textField-custom'
                                 {...register('name', { required: true, minLength: 3, maxLength: 32 })}
+                                onChange={handleOnChangeName}
+                                value={name}
                             />
 
                             {errors?.name?.type === 'required' && <small>Tournament Name is required !</small>}
@@ -215,7 +264,7 @@ const TournamentCreate = () => {
                                     open={open}
                                     onClose={handleClose}
                                     onOpen={handleOpen}
-                                    value={Format}
+                                    value={format}
                                     label='Format'
                                     color='warning'
                                     onChange={handleChange}
@@ -229,7 +278,6 @@ const TournamentCreate = () => {
                             {errors?.format?.type === 'required' && <small className='small-description'>Format is required !</small>}
 
                         </div>
-
                         {/* Description */}
                         <div className='form-title'>
                             <div className='title'><b>Description</b> :</div>
@@ -241,7 +289,8 @@ const TournamentCreate = () => {
                                 multiline
                                 {...register('description', { minLength: 0, maxLength: 256 })}
                                 rows={4}
-
+                                onChange={handleOnChangeDes}
+                                value={description}
                             />
                             {errors?.description?.type === 'maxLength' && (
                                 <small className='small-description'>Maximum length 256 characters !</small>
@@ -257,21 +306,23 @@ const TournamentCreate = () => {
 
                                         renderInput={(params) => <TextField {...params} />}
                                         label='Start-Time'
-                                        value={valueT}
-                                        onChange={(newValue) => {
-                                            setValueT(newValue)
-                                        }}
+                                        value={startAt}
+                                        onChange={handleChangeTime}
                                         minDateTime={new Date()}
+
                                     />
+
                                 </Stack>
                             </LocalizationProvider>
                         </div>
                         <Button
                             sx={{ minWidth: 250 }}
-                            className='btn-CreatT'
+                            className='btn-EditT'
                             type='submit'
+                            onClick={createTour}
                         >
                             Create Tournament
+
                         </Button>
 
                     </div>
