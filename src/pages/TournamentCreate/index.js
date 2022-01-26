@@ -43,7 +43,7 @@ const TournamentCreate = () => {
                 format,
                 gameId: 3333333,
                 hostId: 213123,
-                participantCount: '10',
+                participantCount: '11',
                 startAt: Date()
             })
             alert('Create Success ')
