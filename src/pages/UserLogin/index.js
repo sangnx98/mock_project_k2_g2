@@ -53,7 +53,6 @@ export default function Login() {
                 break
             } else {
                 alert('Wrong email or password')
-                continue
             }
         }
     }
