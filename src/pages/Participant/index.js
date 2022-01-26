@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/system'
 import TabsUnstyled from '@mui/base/TabsUnstyled'
@@ -6,9 +6,9 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled'
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled'
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled'
-
+import {ref, set, push} from 'firebase/database'
+import db from '../../configs/firebaseConfig'
 import './index.css'
-
 import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
 
@@ -81,19 +81,53 @@ const TabsList = styled(TabsListUnstyled)`
 `
 
 export default function Participant() {
+    const [name, setName] = useState('')
+    
+    
+    useEffect(() => {
+    },)
+
+    const onInputChange = (e) => {
+        setName(e.target.value)
+    }
+
+ 
+
+    const handleAdd = (e) => {
+     
+        e.preventDefault()
+        const participantRef = ref(db, 'participants/',)
+        const addParticipant = push(participantRef)
+        set(addParticipant,  {
+            name,
+            standingIndex : 0,
+            totalScore: 0   ,
+            tournamentId: 2374859,
+        }).then(err => {
+            console.log(err)
+        })
+    }
+    
 
     return (
         <div className='tournament-participant-root'>
             <div className='tournament-participant'>
-                <div className='tournament-participant-add-member'>
-                    <input className='tournament-participant-text-box' placeholder='Player Name'/>
+                <form onSubmit={handleAdd} className='tournament-participant-add-member'>
+                    <input className='tournament-participant-text-box' 
+                        type='text' 
+                        placeholder='Player Name'
+                        name='name'
+                        value={name}
+                        onChange={onInputChange}/>
+                      
                     <Button
                         className='tournament-participant-button' 
                         color='secondary'
+                        onClick={handleAdd}
                     >
                         ADD
                     </Button>
-                </div>
+                </form>
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
