@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/globalContext'
 import './index.css'
@@ -39,71 +38,4 @@ export default function PlayerList() {
         </>
     )
 
-=======
-import React from 'react'
-
-import './index.css'
-
-export default function PlayerList() {
-    return (
-        <div className='tournament-participant-list'>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-            <div className='tournament-participant-list-item'>
-                <p>Player 1</p>
-                <div className='list-item-button'>
-                    <button className='list-item-button-common'>Edit</button>
-                    <button className='list-item-button-common'>Delete</button>
-                </div>
-            </div>
-        </div>
-    )
->>>>>>> 63e32394cc46ce303cc6c38b4d5b6ccaadcd1fa6
 }

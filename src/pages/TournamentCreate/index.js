@@ -43,11 +43,7 @@ const TournamentCreate = () => {
                 format,
                 gameId: 3333333,
                 hostId: 213123,
-<<<<<<< HEAD
                 participantCount: '11',
-=======
-                participantCount: '10',
->>>>>>> 63e32394cc46ce303cc6c38b4d5b6ccaadcd1fa6
                 startAt: Date()
             })
             alert('Create Success ')
