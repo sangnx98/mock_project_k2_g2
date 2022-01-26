@@ -21,7 +21,7 @@ const TournamentList = () => {
     const { tournaments, getTournaments } = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
-
+    
     useEffect(() => {
         getTournaments()
     }, [])
