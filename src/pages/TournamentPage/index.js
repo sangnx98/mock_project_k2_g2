@@ -1,6 +1,7 @@
 import MatchHistory from '../MatchHistory'   
 import Banner from '../../components/Banner'
 import Participant from '../Participant'
+import Bracket from '../../components/Bracket'
 import './index.css'
 
 import Box from '@mui/material/Box'
@@ -167,7 +168,7 @@ export default function TournamentPage() {
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>
-                        <Participant/>
+                        <Bracket/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <MatchHistory/>
