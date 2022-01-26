@@ -1,4 +1,7 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, {useContext, useEffect} from 'react'
+import { AppContext } from '../../contexts/globalContext'
+import {Link} from 'react-router-dom'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -10,24 +13,18 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
-import axios from 'axios'
-
-// eslint-disable-next-line no-undef
-const CHALLONGE_API_KEY = process.env.REACT_APP_CHALLONGE_API_KEY
-
 import './index.css'
 
-const getData = () =>{
-    axios.get('https://api.challonge.com/v1/tournaments.json?api_key='+ CHALLONGE_API_KEY)
-        .then(res =>{
-            console.log(res)
-        })
-        .catch(err => console.log(err))
-}
+import {ref, child, get} from 'firebase/database'
 
 const TournamentList = () => {
+    const { tournaments, getTournaments } = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
+
+    useEffect(() => {
+        getTournaments()
+    }, [])
 
     const handleChange = (event) => {
         setGame(event.target.value)
@@ -38,8 +35,6 @@ const TournamentList = () => {
 
     return (
         <div className='section-body'>
-
-            <button onClick={()=>getData()}>Click me</button>
             <Container maxWidth='xl'>
                 <div section className='section-body-title' >
                     <div className='section-title-left'>
@@ -71,7 +66,7 @@ const TournamentList = () => {
                                     label='Age'
                                     onChange={handleChangeStarted}
                                 >
-                                    <MenuItem value='abc'>CSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGOCSGO</MenuItem>
+                                    <MenuItem value='abc'>CSGO</MenuItem>
                                     <MenuItem value={20}>CSGO1</MenuItem>
                                     <MenuItem value={30}>CSGO2</MenuItem>
                                 </Select>
@@ -82,42 +77,43 @@ const TournamentList = () => {
                 <div className='section-featured-content'>
                     <Box sx={{ flexGrow: 1 ,display: { xs: '1', md: 'flex' } }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 6, md: 12 }}>
-                            {Array.from(Array(12)).map((_, index) => (
-                                <Grid item xs={1} sm={2} md={3} key={index}>
-                                    <div className='box-content' >
-                                        <div className = 'box-content-img'>
-                                            <img src='https://www.mobafire.com/images/champion/skins/landscape/jayce-arcane-762x.jpg'  className='img-content'></img>
+                            {Object.keys(tournaments).map(itemId=>{
+                                return(                                    
+                                    <Grid item xs={1} sm={2} md={3} key={itemId}>
+                                        <div className='box-content'>  
+                                            <div className = 'box-content-img'>
+                                                <Link to={'/tournaments/'+ itemId} ><img src='https://www.mobafire.com/images/champion/skins/landscape/jayce-arcane-762x.jpg'  className='img-content'></img></Link>
+                                            </div>
+                                            <div className = 'box-content-decs'>
+                                                <div>
+                                                    <Link to={'/tournaments/'+ itemId} >{tournaments[itemId].name}</Link>
+                                                </div>
+                                                <div className = 'desc-content number'>
+                                                    <PersonRoundedIcon/>
+                                                    <a>{tournaments[itemId].participantCount} người tham gia</a>
+                                                </div>
+                                                <div className = 'desc-content formula'>
+                                                    <EmojiEventsRoundedIcon/>
+                                                    <a>Thể thức: {tournaments[itemId].format}</a>
+                                                </div>
+                                                <div className = 'desc-content game'>
+                                                    <VideogameAssetRoundedIcon/>
+                                                    <a>Game: {tournaments[itemId].gameId}</a>
+                                                </div>
+                                                <div className = 'desc-content date'>
+                                                    <EventNoteRoundedIcon/>
+                                                    <a>Thời gian: {tournaments[itemId].startAt}</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className = 'box-content-decs'>
-                                            <div>
-                                                <a href='#' >League of Kid Academy</a>
-                                            </div>
-                                            <div className = 'desc-content number'>
-                                                <PersonRoundedIcon/>
-                                                <a >2 người</a>
-                                            </div>
-                                            <div className = 'desc-content formula'>
-                                                <EmojiEventsRoundedIcon/>
-                                                <a href='#'>Single Elimination</a>
-                                            </div>
-                                            <div className = 'desc-content game'>
-                                                <VideogameAssetRoundedIcon/>
-                                                <a href='#'  className = 'desc-content game' >League of Legends</a>
-                                            </div>
-                                            <div className = 'desc-content date'>
-                                                <EventNoteRoundedIcon/>
-                                                <a href='#'>January 22, 2022, 4:09 PM </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </Grid>
-                            ))}
+                                    </Grid>)
+                            })}
                         </Grid>
                     </Box>
                 </div>
-            </Container>  
+            </Container>            
         </div>
     )
 }
+
 export default TournamentList
