@@ -1,2 +1,0 @@
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
-export const SAVE_USER = 'SAVE_USER'
