@@ -53,19 +53,10 @@ const AppContextProvider = ({ children }) => {
         })
     }
 
-    const onDeleteParticipant = async (id) => {
-        if(window.confirm('Are you sure you want to delete')){
-            await  db().ref(`participants/${id}`).remove((err) => {
-                if(err) {
-                    console.log('DB Error: ' + err)
-                } else {
-                    console.log('Delete success')
-                }
-            })
-        }
-    }
 
-    const getSingleTournament = (tourId) =>{
+
+
+    const getSingleTournament =  (tourId) =>{
         return tournaments?.find((item)=>item == tourId)
     }
 
@@ -112,7 +103,6 @@ const AppContextProvider = ({ children }) => {
         getGames,
         games,
         participants,
-        onDeleteParticipant,
      
     }
 

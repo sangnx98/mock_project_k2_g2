@@ -99,41 +99,59 @@ export default function Participant() {
         setName(e.target.value)
     }
 
-    function handleAdd(e) {
-        Object.keys(participants).map(x => {
-            e.preventDefault()
-            if(playerRef.current.value === ''){
-                errAddPlayer.current.innerText = 'Chưa điền tên người chơi'
-                playerRef.current.focus()
+    function handleAddPlayer(e) {
+        e.preventDefault()
+        const keys = Object.keys(participants)
+        let checkNamePlayer, checkNumberPlayer= false
+        if(playerRef.current.value === ''){
+            errAddPlayer.current.innerText = 'Chưa điền tên người chơi '
+            playerRef.current.focus()
+            return
+        }
+        for (let index = 0; index < keys.length; index++ )  {
+            const element = participants[keys[index]]
+            const elementId = element.tournamentId === id
+            const limit  =  elementId === true 
+            console.log(limit)
+            if(element.name === playerRef.current.value ) {
+                checkNamePlayer = true
+            } if ( limit > 32){
+                checkNumberPlayer= true
+                break
             }
-            else if(playerRef.current.value === participants[x].name){
-                errAddPlayer.current.innerText = 'Người chơi đã tồn tại'
-                playerRef.current.focus()
-                console.log('abcdd')
-            }
-            else {
-                if( window.confirm('Bạn muốn thêm người chơi này? ')){
-                    const participantRef = ref(db, 'participants/',)
-                    const addParticipant = push(participantRef)
-                    const name = playerRef.current.value
-                    set(addParticipant,  {
-                        name,
-                        standingIndex : 0, 
-                        totalScore: 0   ,
-                        tournamentId: id,
-                    })
-                        .then(err => {
-                            console.log(err)
-                        })
-                }
-            }
-        })
+        }
+    
+        if(checkNamePlayer) {
+            errAddPlayer.current.innerText = 'Người chơi đã tồn tại'
+            playerRef.current.focus()
+            return
+        }
+        if(checkNumberPlayer) {
+            errAddPlayer.current.innerText = 'Số người chơi không thể vượt quá 32'
+            playerRef.current.focus()
+            return
+        }
+
+        if (window.confirm(`Bạn muốn thêm người chơi ${playerRef.current.value}`)){
+            const participantRef = ref(db, 'participants/')
+            const addParticipant = push(participantRef)
+            const name = playerRef.current.value
+            set(addParticipant,  {
+                name,
+                standingIndex : 0, 
+                totalScore: 0   ,
+                tournamentId: id,
+            }).then(err => {
+                console.log(err)
+            })
+        }
+
     }
 
     return (
         <div className='tournament-participant-root'>
             <div className='tournament-participant'>
-                <form onSubmit={handleAdd} className='tournament-participant-add-member'>
+                <form className='tournament-participant-add-member'>
                     <input className='tournament-participant-text-box' 
                         type='text' 
                         placeholder='Player Name'
@@ -141,11 +159,10 @@ export default function Participant() {
                         value={name}
                         onChange={onInputChange}
                         ref={playerRef}/>
-                      
                     <Button
                         className='tournament-participant-button' 
                         color='secondary'
-                        onClick={handleAdd}
+                        onClick={handleAddPlayer}
                     >
                         ADD
                     </Button>
@@ -154,10 +171,10 @@ export default function Participant() {
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
-                            <Tab handleAdd={handleAdd} >Player List </Tab>
+                            <Tab >Player List </Tab>
                             <Tab>Request list</Tab>
                         </TabsList>
-                        <TabPanel value={0}><PlayerList/></TabPanel>
+                        <TabPanel value={0} ><PlayerList/></TabPanel>
                         <TabPanel value={1}><RequestQueue/></TabPanel>
                     </TabsUnstyled>
                 </div>
