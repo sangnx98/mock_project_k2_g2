@@ -112,10 +112,10 @@ export default function Participant() {
             const element = participants[keys[index]]
             const elementId = element.tournamentId === id
             const limit  =  elementId === true 
-            console.log(limit)
-            if(element.name === playerRef.current.value ) {
+
+            if(element.name === playerRef.current.value && elementId  ) {
                 checkNamePlayer = true
-            } if ( limit > 32){
+            } if ( limit > 16){
                 checkNumberPlayer= true
                 break
             }
