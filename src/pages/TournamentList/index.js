@@ -14,19 +14,18 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import './index.css'
-
-
 import {ref, child, get} from 'firebase/database'
 
 const TournamentList = () => {
-    const { tournaments, getTournaments} = useContext(AppContext)
     const { games, getGames } = useContext(AppContext)
+    const { tournaments, getTournaments, getUserLogged } = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
 
     useEffect(() => {
         getGames()
-        getTournaments()
+        getTournaments(),
+        getUserLogged()
     }, [])
 
     const handleChange = (event) => {

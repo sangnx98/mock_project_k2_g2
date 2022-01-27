@@ -15,8 +15,9 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 import './index.css'
+import { AppContext } from '../../contexts/globalContext'
+import { useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -61,7 +62,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 // eslint-disable-next-line react/prop-types
-const Header = ({loginState}) => {
+const Header = () => {
+    const navigate = useNavigate()
+    const { userLogged, getUserLogged, writeDataTable} = React.useContext(AppContext)
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
 
@@ -80,6 +83,17 @@ const Header = ({loginState}) => {
         setAnchorElUser(null)
     }
 
+    const handleLoggout = () =>{
+        writeDataTable(null, 'userLogged')
+        navigate('/')
+        window.location.reload()
+    }
+
+    React.useEffect(()=>{
+        getUserLogged()
+    },[])
+    console.log('userlogged', userLogged)
+    console.log('location',window.location)
     return (
         <AppBar position='fixed' className='appBar'>
             <Container maxWidth='xl'>
@@ -155,13 +169,13 @@ const Header = ({loginState}) => {
                         />
                     </Search>
 
-                    {(loginState == true)? 
+                    {(userLogged?.id)? 
                         (<Box sx={{ flexGrow: 0 }}>
                             <Tooltip title='Open settings'>
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar
                                         alt='Profile Image'
-                                        src='https://static2.yan.vn/YanNews/2167221/202106/nguoi-bo-bi-an-cua-jisoo-blackpink-quen-biet-toan-sao-noi-tieng-17cf6363.jpg'
+                                        src={userLogged.avatarURL}
                                     />
                                 </IconButton>
                             </Tooltip>
@@ -181,12 +195,11 @@ const Header = ({loginState}) => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign='center'>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+
+                                <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
+                                <MenuItem onClick={handleLoggout}>Logout</MenuItem>
+                            </Menu>            
                         </Box>) : (
                             <div>
                                 <Link to='/user/register'><Button
@@ -204,7 +217,6 @@ const Header = ({loginState}) => {
                                     Login
                                 </Button></Link>
                             </div>
-                            
                         )}
                 </Toolbar>
             </Container>
