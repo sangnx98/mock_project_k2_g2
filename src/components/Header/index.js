@@ -17,7 +17,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
 import './index.css'
 import { AppContext } from '../../contexts/globalContext'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -62,12 +62,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 // eslint-disable-next-line react/prop-types
-const Header = ({loginState}) => {
-    // const navigate = useNavigate()
+const Header = () => {
+    const navigate = useNavigate()
     const { userLogged, getUserLogged, writeDataTable} = React.useContext(AppContext)
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
-
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget)
@@ -86,10 +85,15 @@ const Header = ({loginState}) => {
 
     const handleLoggout = () =>{
         writeDataTable(null, 'userLogged')
+        navigate('/')
+        window.location.reload()
     }
+
     React.useEffect(()=>{
         getUserLogged()
     },[])
+    console.log('userlogged', userLogged)
+    console.log('location',window.location)
     return (
         <AppBar position='fixed' className='appBar'>
             <Container maxWidth='xl'>
@@ -213,7 +217,6 @@ const Header = ({loginState}) => {
                                     Login
                                 </Button></Link>
                             </div>
-                            
                         )}
                 </Toolbar>
             </Container>
