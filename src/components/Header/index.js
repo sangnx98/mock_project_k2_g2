@@ -15,9 +15,9 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
-import {useSelector} from 'react-redux'
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 import './index.css'
+import { AppContext } from '../../contexts/globalContext'
+// import { useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -63,9 +63,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // eslint-disable-next-line react/prop-types
 const Header = ({loginState}) => {
-    const user = useSelector(state => state.auth.user)
+    // const navigate = useNavigate()
+    const { userLogged, getUserLogged, writeDataTable} = React.useContext(AppContext)
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget)
@@ -81,7 +83,13 @@ const Header = ({loginState}) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
     }
-    console.log('islogin', loginState)
+
+    const handleLoggout = () =>{
+        writeDataTable(null, 'userLogged')
+    }
+    React.useEffect(()=>{
+        getUserLogged()
+    },[])
     return (
         <AppBar position='fixed' className='appBar'>
             <Container maxWidth='xl'>
@@ -157,13 +165,13 @@ const Header = ({loginState}) => {
                         />
                     </Search>
 
-                    {(loginState == true)? 
+                    {(userLogged?.id)? 
                         (<Box sx={{ flexGrow: 0 }}>
                             <Tooltip title='Open settings'>
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar
                                         alt='Profile Image'
-                                        src={user.avatarURL}
+                                        src={userLogged.avatarURL}
                                     />
                                 </IconButton>
                             </Tooltip>
@@ -183,12 +191,11 @@ const Header = ({loginState}) => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign='center'>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
+
+                                <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
+                                <MenuItem onClick={handleLoggout}>Logout</MenuItem>
+                            </Menu>            
                         </Box>) : (
                             <div>
                                 <Link to='/user/register'><Button

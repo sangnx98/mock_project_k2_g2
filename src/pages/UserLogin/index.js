@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
 import './index.css'
 
 import Button from '@mui/material/Button'
@@ -16,9 +15,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import GoogleIcon from '@mui/icons-material/Google'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import axios from 'axios'
+// import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+
+import { AppContext } from '../../contexts/globalContext'
 
 function Copyright(props) {
     return (
@@ -36,63 +36,33 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function Login() {
+    const { getUserLogged, users, writeDataTable, getUser } = React.useContext(AppContext)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const signUpSuccess = useSelector(state => state.auth.isSuccess)
-    const loginFailed = useSelector(state => state.auth.isSuccess)
-    const [listUser, setListUser] = React.useState([])
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const onSubmit = (data) => {
-        let idUser
-        listUser.map(item => {
-            if (item.email === data.email && item.password === data.password) {
-                idUser = item.id
-            }
-        })
-        axios.get(`https://61eace3e7ec58900177cda33.mockapi.io/users/${idUser}`)
-            .then((res=>{
-                console.log('detail', res.data)
-                dispatch({type: 'SAVE_USER', payload: res.data})
-                localStorage.setItem('user', JSON.stringify(res.data))
+    const listUser = [...users]
+
+    const onSubmit = ( data) => {
+        const email = data.email
+        const password = data.password
+        for (let i = 0; i < listUser.length; i++) {
+            console.log('current data',email, password )
+            console.log('listUser[i]',listUser[i].email, listUser[i].password  == password)
+            if (listUser[i].email === email && listUser[i].password == password) {
+                writeDataTable(listUser[i], 'userLogged')
                 navigate('/tournaments')
-            }))      
+                break
+            } else {
+                alert('Wrong email or password')
+                continue
+            }
+        }
     }
     
-
     React.useEffect(() => {
-        axios.get('https://61eace3e7ec58900177cda33.mockapi.io/users')
-            .then(res=>{
-                console.log('res', res)
-                setListUser(res.data)
-            })
-        return () => {
-            dispatch({type: 'SIGNUP_CLEAR'})
-        }
+        getUser(),
+        getUserLogged()
     }, [])
 
-    React.useEffect(() => {
-        if (signUpSuccess) {
-            toast('Well done, now login and enjoy ^^',{
-                className: 'success-toast',
-                draggable: true,
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,
-                type: toast.TYPE.SUCCESS
-            })
-        }
-    }, [signUpSuccess])
-    React.useEffect(() => {
-        if (loginFailed) {
-            toast('Wrong Email or Password',{
-                className: 'success-toast',
-                draggable: true,
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,
-                type: toast.TYPE.ERROR
-            })
-        }
-    }, [loginFailed])
-    console.log('list user', listUser)
     return (
         <ThemeProvider theme={theme}>
             <Grid container component='main' sx={{ height: '100vh' }}>
