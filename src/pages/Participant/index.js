@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect,useRef, useContext} from 'react'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/system'
 import TabsUnstyled from '@mui/base/TabsUnstyled'
@@ -11,6 +11,10 @@ import db from '../../configs/firebaseConfig'
 import './index.css'
 import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
+import { AppContext } from '../../contexts/globalContext'
+import { useParams } from 'react-router-dom'
+
+
 
 const blue = {
     50: '#F0F7FF',
@@ -82,32 +86,49 @@ const TabsList = styled(TabsListUnstyled)`
 
 export default function Participant() {
     const [name, setName] = useState('')
-    
+    const {  participants, getParticipants} = useContext(AppContext)
+    const errAddPlayer = useRef(null)
+    const playerRef = useRef(null)
+    const {id } = useParams()
     
     useEffect(() => {
-    },)
+        getParticipants()
+    }, [])
 
     const onInputChange = (e) => {
         setName(e.target.value)
     }
 
- 
-
-    const handleAdd = (e) => {
-     
-        e.preventDefault()
-        const participantRef = ref(db, 'participants/',)
-        const addParticipant = push(participantRef)
-        set(addParticipant,  {
-            name,
-            standingIndex : 0,
-            totalScore: 0   ,
-            tournamentId: 2374859,
-        }).then(err => {
-            console.log(err)
+    function handleAdd(e) {
+        Object.keys(participants).map(x => {
+            e.preventDefault()
+            if(playerRef.current.value === ''){
+                errAddPlayer.current.innerText = 'Chưa điền tên người chơi'
+                playerRef.current.focus()
+            }
+            else if(playerRef.current.value === participants[x].name){
+                errAddPlayer.current.innerText = 'Người chơi đã tồn tại'
+                playerRef.current.focus()
+                console.log('abcdd')
+            }
+            else {
+                if( window.confirm('Bạn muốn thêm người chơi này? ')){
+                    const participantRef = ref(db, 'participants/',)
+                    const addParticipant = push(participantRef)
+                    const name = playerRef.current.value
+                    set(addParticipant,  {
+                        name,
+                        standingIndex : 0, 
+                        totalScore: 0   ,
+                        tournamentId: id,
+                    })
+                        .then(err => {
+                            console.log(err)
+                        })
+                }
+            }
         })
     }
-    
 
     return (
         <div className='tournament-participant-root'>
@@ -118,7 +139,8 @@ export default function Participant() {
                         placeholder='Player Name'
                         name='name'
                         value={name}
-                        onChange={onInputChange}/>
+                        onChange={onInputChange}
+                        ref={playerRef}/>
                       
                     <Button
                         className='tournament-participant-button' 
@@ -128,10 +150,11 @@ export default function Participant() {
                         ADD
                     </Button>
                 </form>
+                <span ref={errAddPlayer} className='err-'></span>
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
-                            <Tab>Player List</Tab>
+                            <Tab handleAdd={handleAdd} >Player List </Tab>
                             <Tab>Request list</Tab>
                         </TabsList>
                         <TabPanel value={0}><PlayerList/></TabPanel>
