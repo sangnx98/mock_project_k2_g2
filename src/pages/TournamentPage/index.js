@@ -1,6 +1,7 @@
 import MatchHistory from '../MatchHistory'   
 import Banner from '../../components/Banner'
 import Participant from '../Participant'
+import Bracket from '../../components/Bracket'
 import './index.css'
 
 import Box from '@mui/material/Box'
@@ -124,26 +125,26 @@ export default function TournamentPage() {
                                             <div className='tournament-intro-detail'>
                                                 <div className='tournament-intro-item'>
                                                     <PermIdentityIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].participantCount} người chơi</p>
+                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].participantCount)? tournaments[tournamentsId].participantCount: 0} người chơi</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <EmojiEventsIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].format}</p>
+                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].format)? tournaments[tournamentsId].format: 'None'}</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <SportsEsportsIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].gameId}</p>
+                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].gameId)? tournaments[tournamentsId].gameId: 'None'}</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <AccessTimeIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].startAt}</p>
+                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].startAt)? tournaments[tournamentsId].startAt: 'None'}</p>
                                                 </div>
                                             </div>
                                             <div className='tournament-intro-description'>
                                                 <p>Description</p>
                                             </div>
                                             <div className='tournament-intro-description-detail'>
-                                                <p>{tournaments[tournamentsId].description}</p>
+                                                <p>{(tournaments[tournamentsId].description)?tournaments[tournamentsId].description:'No description specified'}</p>
                                             </div>
                                         </div>
                                         <div>
@@ -167,7 +168,7 @@ export default function TournamentPage() {
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>
-                        <Participant/>
+                        <Bracket tournamentId={id} format={tournaments[id].format}/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <MatchHistory/>

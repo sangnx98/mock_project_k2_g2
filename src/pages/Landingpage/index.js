@@ -19,7 +19,7 @@ export default function Landingpage() {
                         <h3 className='content-center'>Join the millions who trust us to manage their tournaments.<br /> More than 28,575,585 brackets created around the world.</h3>
                     </div>
                     <Stack spacing={1} direction='row' style={{ display: 'flex' , justifyContent: 'center' }} >                   
-                        <Link to='/tournaments/create'><Button  sx={{ minWidth: 250 }}
+                        <Link to='/user/login'><Button  sx={{ minWidth: 250 }}
                             className='btn-create-tou'
                             type='submit'>
                             Create Tournaments Now
