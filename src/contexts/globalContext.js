@@ -13,6 +13,7 @@ export const AppContext = createContext()
 const AppContextProvider = ({ children }) => {
     const [tournaments, setTournaments] = React.useState('')
     const [participants, setParticipants] = React.useState('')
+    const [games, setGames] = React.useState('')
 
     const getTournaments = () =>{
         get(child(dbRef, 'tournaments/')).then((snapshot)=>{
@@ -26,6 +27,19 @@ const AppContextProvider = ({ children }) => {
         })
     }
 
+    const getGames = () =>{
+        get(child(dbRef, 'games/')).then((snapshot)=>{
+            if(snapshot.exists()){
+                setGames(snapshot.val())
+            } else{
+                console.log('No data found')
+            }
+        }).catch(err =>{
+            console.error('DB Error: ' + err)
+        })
+    }
+
+
     const getParticipants = () => {
         get(child(dbRef, 'participants/')).then((snapshot) => {
             if(snapshot.exists()){
@@ -38,7 +52,7 @@ const AppContextProvider = ({ children }) => {
         })
     }
 
-    const onDelete = async (id) => {
+    const onDeleteParticipant = async (id) => {
         if(window.confirm('Are you sure you want to delete')){
             await  db().ref(`participants/${id}`).remove((err) => {
                 if(err) {
@@ -50,23 +64,19 @@ const AppContextProvider = ({ children }) => {
         }
     }
 
-  
-
     const getSingleTournament =  (tourId) =>{
         return tournaments?.find((item)=>item == tourId)
     }
 
-
-    
-
-
     const AppContextData = {
         getTournaments,
         getSingleTournament,
-        tournaments,
         getParticipants, 
+        getGames,
+        tournaments,
+        games,
         participants,
-        onDelete,
+        onDeleteParticipant,
      
     }
 
