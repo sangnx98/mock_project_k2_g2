@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Container from '@mui/material/Container'
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
@@ -77,6 +78,12 @@ const TournamentList = () => {
                     </div>
                 </div>    
                 <div className='section-featured-content'>
+                    <Link to='/tournaments/create'><Button  sx={{ minWidth: 250 }}
+                        className='btn-create-tou'
+                        type='submit'>
+                        Create Tournaments Now
+                    </Button></Link>
+                    
                     <Box sx={{ flexGrow: 1 ,display: { xs: '1', md: 'flex' } }}>
                         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 6, md: 12 }}>
                             {Object.keys(tournaments).map(itemId=>{
