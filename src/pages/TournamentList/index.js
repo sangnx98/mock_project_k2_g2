@@ -14,18 +14,19 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
 import './index.css'
+
+
 import {ref, child, get} from 'firebase/database'
 
 const TournamentList = () => {
-    const { games, getGames } = useContext(AppContext)
-    const { tournaments, getTournaments, getUserLogged } = useContext(AppContext)
+    const { tournaments, getTournaments} = useContext(AppContext)
     const [game, setGame] = React.useState('')
     const [startAt, setStartAt] = React.useState('')
 
+ 
+    
     useEffect(() => {
-        getGames()
-        getTournaments(),
-        getUserLogged()
+        getTournaments()
     }, [])
 
     const handleChange = (event) => {
@@ -88,23 +89,23 @@ const TournamentList = () => {
                                             </div>
                                             <div className = 'box-content-decs'>
                                                 <div>
-                                                    <Link to={'/tournaments/'+ itemId} >{(tournaments[itemId].name)? tournaments[itemId].name: 'Untitiled Tournament'}</Link>
+                                                    <Link to={'/tournaments/'+ itemId} >{tournaments[itemId].name}</Link>
                                                 </div>
                                                 <div className = 'desc-content number'>
                                                     <PersonRoundedIcon/>
-                                                    <a>{(tournaments[itemId].participantCount)? tournaments[itemId].participantCount: '0'} người tham gia</a>
+                                                    <a>{tournaments[itemId].participantCount} người tham gia</a>
                                                 </div>
                                                 <div className = 'desc-content formula'>
                                                     <EmojiEventsRoundedIcon/>
-                                                    <a>Thể thức: {(tournaments[itemId].format)? tournaments[itemId].format: 'Unspecified'}</a>
+                                                    <a>Thể thức: {tournaments[itemId].format}</a>
                                                 </div>
                                                 <div className = 'desc-content game'>
                                                     <VideogameAssetRoundedIcon/>
-                                                    <a>Game: {(games[tournaments[itemId].gameId])? games[tournaments[itemId].gameId]: 'Unspecified'}</a>
+                                                    <a>Game: {tournaments[itemId].gameId}</a>
                                                 </div>
                                                 <div className = 'desc-content date'>
                                                     <EventNoteRoundedIcon/>
-                                                    <a>Thời gian: {(tournaments[itemId].startAt)? tournaments[itemId].startAt: 'Unspecified'}</a>
+                                                    <a>Thời gian: {tournaments[itemId].startAt}</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+
 import './index.css'
 
 import Button from '@mui/material/Button'
@@ -12,11 +13,9 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
+import GoogleIcon from '@mui/icons-material/Google'
+import FacebookIcon from '@mui/icons-material/Facebook'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
-import { AppContext } from '../../contexts/globalContext'
 
 function Copyright(props) {
     return (
@@ -34,30 +33,18 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function Login() {
-    const {  users, writeDataTable, getUser } = React.useContext(AppContext)
-    const navigate = useNavigate()
     const {register, handleSubmit, formState:{ errors }} = useForm()
-    const listUser = [...users]
+    const onSubmit = (data) => console.log(data)
 
-    const onSubmit = ( data) => {
-        const email = data.email
-        const password = data.password
-        const arr = listUser.filter(user=>
-            user.email === email && user.password == password
-        )
-        console.log('arr', arr)
-        if(arr.length >0){
-            writeDataTable(arr[0], 'userLogged')
-            navigate('/tournaments')
-        }else{
-            alert('Wrong email or password')
-        }
-    }
-    
-    React.useEffect(() => {
-        getUser()
-    }, [])
-
+    // const handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     const data = new FormData(event.currentTarget)
+    //     // eslint-disable-next-line no-console
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     })
+    // }
     return (
         <ThemeProvider theme={theme}>
             <Grid container component='main' sx={{ height: '100vh' }}>
@@ -140,6 +127,24 @@ export default function Login() {
                                 >
                                     Sign In
                                 </Button>
+                                <div className='btn-login-social'>
+                                    <Button 
+                                        className='btn btn-social'
+                                        type='submit'
+                                        variant='contained'
+                                        sx={{ mt: 3, mb: 2 }}
+                                    >
+                                        <FacebookIcon/>
+                                    </Button>
+                                    <Button
+                                        className='btn btn-social btn-google'
+                                        type='submit'
+                                        variant='contained'
+                                        sx={{ mt: 3, mb: 2 }}
+                                    >
+                                        <GoogleIcon/>
+                                    </Button>
+                                </div>
                                 <Grid container>
                                     <Grid item xs>
                                         <Link href='#' variant='body2'>
@@ -147,7 +152,7 @@ export default function Login() {
                                         </Link>
                                     </Grid>
                                     <Grid item>
-                                        <Link href='/user/register' variant='body2'>
+                                        <Link href='#' variant='body2'>
                                             {'Dont have an account? Sign Up'}
                                         </Link>
                                     </Grid>
