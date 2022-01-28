@@ -10,7 +10,6 @@ import {ref, set, push} from 'firebase/database'
 import db from '../../configs/firebaseConfig'
 import './index.css'
 import PlayerList from '../PlayerList'
-import RequestQueue from '../RequestQueue'
 import { AppContext } from '../../contexts/globalContext'
 import { useParams } from 'react-router-dom'
 
@@ -172,10 +171,8 @@ export default function Participant() {
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
                             <Tab >Player List </Tab>
-                            <Tab>Request list</Tab>
                         </TabsList>
-                        <TabPanel value={0} ><PlayerList/></TabPanel>
-                        <TabPanel value={1}><RequestQueue/></TabPanel>
+                        <TabPanel value={0} ><PlayerList/></TabPanel>         
                     </TabsUnstyled>
                 </div>
             </div>
