@@ -15,9 +15,8 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase'
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 import './index.css'
-import { AppContext } from '../../contexts/globalContext'
-import { useNavigate } from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -62,9 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 // eslint-disable-next-line react/prop-types
-const Header = () => {
-    const navigate = useNavigate()
-    const { userLogged, getUserLogged, writeDataTable} = React.useContext(AppContext)
+const Header = ({loginState}) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorElUser] = React.useState(null)
 
@@ -83,17 +80,6 @@ const Header = () => {
         setAnchorElUser(null)
     }
 
-    const handleLoggout = () =>{
-        writeDataTable(null, 'userLogged')
-        navigate('/')
-        window.location.reload()
-    }
-
-    React.useEffect(()=>{
-        getUserLogged()
-    },[])
-    console.log('userlogged', userLogged)
-    console.log('location',window.location)
     return (
         <AppBar position='fixed' className='appBar'>
             <Container maxWidth='xl'>
@@ -169,13 +155,13 @@ const Header = () => {
                         />
                     </Search>
 
-                    {(userLogged?.id)? 
+                    {(loginState == true)? 
                         (<Box sx={{ flexGrow: 0 }}>
                             <Tooltip title='Open settings'>
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar
                                         alt='Profile Image'
-                                        src={userLogged.avatarURL}
+                                        src='https://static2.yan.vn/YanNews/2167221/202106/nguoi-bo-bi-an-cua-jisoo-blackpink-quen-biet-toan-sao-noi-tieng-17cf6363.jpg'
                                     />
                                 </IconButton>
                             </Tooltip>
@@ -195,11 +181,12 @@ const Header = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-
-                                <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-                                <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
-                                <MenuItem onClick={handleLoggout}>Logout</MenuItem>
-                            </Menu>            
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                                        <Typography textAlign='center'>{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </Box>) : (
                             <div>
                                 <Link to='/user/register'><Button
@@ -217,6 +204,7 @@ const Header = () => {
                                     Login
                                 </Button></Link>
                             </div>
+                            
                         )}
                 </Toolbar>
             </Container>

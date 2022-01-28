@@ -1,0 +1,166 @@
+/* .form-matchdetail {
+    position: absolute;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    top: 27rem;
+    left: -0.9rem;
+} */
+.bannerMatch {
+    width: 80%;
+    height: 600px;
+    margin: 30px auto;
+    background-color: #2B303D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(250, 172, 29, 0.15);
+}
+
+.bannerMatch .bannerMatch-child1 {
+    width: 33%;
+    height: 100%;
+    text-align: center;
+}
+
+.bannerMatch .bannerMatch-child2 {
+    width: 34%;
+    height: 100%;
+    text-align: center;
+}
+
+.bannerMatch .bannerMatch-child2 .gameTime {
+    font-weight: 700;
+    font-size: 70px;
+}
+
+.bannerMatch .bannerMatch-child3 {
+    width: 33%;
+    height: 100%;
+    text-align: center;
+}
+
+.bannerMatch .name-page {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: -10px;
+    top: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.bannerMatch .name-page::before {
+    content: "Match detais ";
+    position: absolute;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center !important;
+    line-height: 3;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    width: 160%;
+    height: 60px;
+    background-color: #F3950D;
+    transform: rotate(-45deg) translateY(-30px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bannerMatch .name-page::after {
+    content: '';
+    position: absolute;
+    bottom : 0 ;
+    left : 0 ;
+    width: 15px;
+    height: 15px;
+    background-color: #a57128;
+    z-index: -1;
+    box-shadow: 185px -185px #a57128;
+}
+.infoTeam {
+    height: 50%;
+    margin-top: 50px;
+}
+
+.infoTeam .text-TournamentName {
+    color: #4F5D8F;
+}
+
+.infoTeam .text-TournamentName:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #6c81ce;
+}
+
+.matchOver {
+    height: 20%;
+}
+
+.matchOver .gameWin {
+    font-size: 40px;
+}
+
+.btn-dialog Button {
+    background-color: #F3950D;
+    color: #fff;
+}
+
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    width: 800px;
+    height: 500px;
+    background-color: #2c303a !important;
+    color: #fff !important;
+    border-radius:20px;
+}
+
+.tb-report-score {
+    -webkit-tap-highlight-color: transparent;
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.428571429;
+    color: #D8D8D8;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    background-color: #2B303D;
+    margin-bottom: 24px;
+    height: 80%;
+    text-align: center;
+}
+.line2 {
+    background-color: #262b38;
+}
+.line1 {
+    background-color: #1e232f;
+}
+.btn-handle {
+    color : white !important;
+    background-color: #F3950D !important;
+    margin-right: 15px !important;
+}
+.btn-handle:hover {
+    background-color : #2c303a !important;
+}
+#outlined-basic {
+    color : #fff !important;
+}
+.description-match {
+    width: 80%;
+    margin: 0 auto;
+}
+#demo-helper-text-aligned-no-helper {
+    color : #fff !important;
+}
+hr {
+    width: 90%;
+    border: 0.5px solid gray;
+
+}

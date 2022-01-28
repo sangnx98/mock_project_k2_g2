@@ -1,7 +1,8 @@
-import MatchHistory from '../MatchHistory'   
+import MatchHistory from '../MatchHistory'
 import Banner from '../../components/Banner'
 import Participant from '../Participant'
 import Bracket from '../../components/Bracket'
+import TournamentEdit from '../TournamentEdit'
 import './index.css'
 
 import Box from '@mui/material/Box'
@@ -14,7 +15,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
-import React, {useContext, useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/globalContext'
 import { useParams } from 'react-router-dom'
 
@@ -26,7 +27,7 @@ const styles = {
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
-  
+
     return (
         <div
             role='tabpanel'
@@ -43,13 +44,13 @@ function TabPanel(props) {
         </div>
     )
 }
-  
+
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 }
-  
+
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
@@ -73,14 +74,14 @@ export default function TournamentPage() {
     return (
         <>
             <div className='tournament-detail-page'>
-                <Banner/>
-                <Box 
+                <Banner />
+                <Box
                     className='tournament-tabs'
                     sx={{ width: '100%' }}>
-                    <Box 
+                    <Box
                         className='tournament-tabs-menu'
                         sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs 
+                        <Tabs
                             className='tournament-tabs-items'
                             value={value} onChange={handleChange} aria-label='basic tabs example'>
                             <Tab style={styles.tab} label='Bracket' {...a11yProps(0)} />
@@ -94,7 +95,7 @@ export default function TournamentPage() {
                     </div>
                 </Box>
                 <Box
-                    className ='tournament-page-intro'
+                    className='tournament-page-intro'
                     sx={{
                         display: 'flex',
                         justifyContent: 'space-around',
@@ -107,40 +108,40 @@ export default function TournamentPage() {
                         }
                     }}
                 >
-                    
+
                     <Paper
                         className='tournament-intro'
                         elevation={3}
-                    >  
+                    >
                         {Object.keys(tournaments).map(tournamentsId => {
-                            if(id == tournamentsId){
-                                return(
+                            if (id == tournamentsId) {
+                                return (
                                     <React.Fragment key={tournamentsId}>
                                         <div className='tournament-game-intro' >
-                                            <label className='tournament-intro-name'> {(id == tournamentsId) ? tournaments[tournamentsId].name : '' }</label>
+                                            <label className='tournament-intro-name'> {(id == tournamentsId) ? tournaments[tournamentsId].name : ''}</label>
                                             <div className='tournament-intro-detail'>
                                                 <div className='tournament-intro-item'>
                                                     <PermIdentityIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].participantCount)? tournaments[tournamentsId].participantCount: 0} người chơi</p>
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].participantCount} người chơi</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <EmojiEventsIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].format)? tournaments[tournamentsId].format: 'None'}</p>
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].format}</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <SportsEsportsIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].gameId)? tournaments[tournamentsId].gameId: 'None'}</p>
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].gameId}</p>
                                                 </div>
                                                 <div className='tournament-intro-item'>
                                                     <AccessTimeIcon className='tournament-intro-item-icon' />
-                                                    <p className='tournament-intro-item-content'>{(tournaments[tournamentsId].startAt)? tournaments[tournamentsId].startAt: 'None'}</p>
+                                                    <p className='tournament-intro-item-content'>{tournaments[tournamentsId].startAt}</p>
                                                 </div>
                                             </div>
                                             <div className='tournament-intro-description'>
                                                 <p>Description</p>
                                             </div>
                                             <div className='tournament-intro-description-detail'>
-                                                <p>{(tournaments[tournamentsId].description)?tournaments[tournamentsId].description:'No description specified'}</p>
+                                                <p>{tournaments[tournamentsId].description}</p>
                                             </div>
                                         </div>
                                         <div>
@@ -160,23 +161,23 @@ export default function TournamentPage() {
                             }
                         })}
                     </Paper>
-                    
+
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>
                         <Bracket tournamentId={id}/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <MatchHistory/>
+                        <MatchHistory />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <Participant/>
+                        <Participant />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <Participant/>
+                        <TournamentEdit />
                     </TabPanel>
                 </Box>
-                
+
             </div>
         </>
     )
