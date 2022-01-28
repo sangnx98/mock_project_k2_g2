@@ -20,10 +20,12 @@
 }
 
 .list-item-button-common{
-    width: 4rem;
-    height: 2rem;
-    background-color: #E68E10;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
+    width: 4rem !important;
+    height: 2rem !important ;
+    background-color: #E68E10 !important;
+    margin-right: 10px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
 }

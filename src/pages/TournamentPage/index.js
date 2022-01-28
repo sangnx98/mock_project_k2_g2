@@ -3,6 +3,7 @@ import Banner from '../../components/Banner'
 import Participant from '../Participant'
 import Bracket from '../../components/Bracket'
 import './index.css'
+import TournamentEdit from '../TournamentEdit'
 
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -173,7 +174,7 @@ export default function TournamentPage() {
                         <Participant/>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <Participant/>
+                        <TournamentEdit/>
                     </TabPanel>
                 </Box>
                 
