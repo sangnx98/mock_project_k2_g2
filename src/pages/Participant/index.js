@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect,useRef, useContext} from 'react'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/system'
 import TabsUnstyled from '@mui/base/TabsUnstyled'
@@ -11,6 +11,10 @@ import db from '../../configs/firebaseConfig'
 import './index.css'
 import PlayerList from '../PlayerList'
 import RequestQueue from '../RequestQueue'
+import { AppContext } from '../../contexts/globalContext'
+import { useParams } from 'react-router-dom'
+
+
 
 const blue = {
     50: '#F0F7FF',
@@ -82,59 +86,95 @@ const TabsList = styled(TabsListUnstyled)`
 
 export default function Participant() {
     const [name, setName] = useState('')
-    
+    const {  participants, getParticipants} = useContext(AppContext)
+    const errAddPlayer = useRef(null)
+    const playerRef = useRef(null)
+    const {id } = useParams()
     
     useEffect(() => {
-    },)
+        getParticipants()
+    }, [])
 
     const onInputChange = (e) => {
         setName(e.target.value)
     }
 
- 
-
-    const handleAdd = (e) => {
-     
+    function handleAddPlayer(e) {
         e.preventDefault()
-        const participantRef = ref(db, 'participants/',)
-        const addParticipant = push(participantRef)
-        set(addParticipant,  {
-            name,
-            standingIndex : 0,
-            totalScore: 0   ,
-            tournamentId: 2374859,
-        }).then(err => {
-            console.log(err)
-        })
-    }
+        const keys = Object.keys(participants)
+        let checkNamePlayer, checkNumberPlayer= false
+        if(playerRef.current.value === ''){
+            errAddPlayer.current.innerText = 'Chưa điền tên người chơi '
+            playerRef.current.focus()
+            return
+        }
+        for(let index = 0; index < keys.length; index++ )  {
+            const element = participants[keys[index]]
+            console.log(participants[keys])
+            const elementId = element.tournamentId === id
+            const limit  =  elementId === true 
+            if(element.name === playerRef.current.value && elementId  ) {
+                checkNamePlayer = true
+            } if ( limit > 16){
+                checkNumberPlayer= true
+                break
+            }
+        }
     
+        if(checkNamePlayer) {
+            errAddPlayer.current.innerText = 'Người chơi đã tồn tại'
+            playerRef.current.focus()
+            return
+        }
+        if(checkNumberPlayer) {
+            errAddPlayer.current.innerText = 'Số người chơi không thể vượt quá 32'
+            playerRef.current.focus()
+            return
+        }
+
+        if (window.confirm(`Bạn muốn thêm người chơi ${playerRef.current.value}`)){
+            const participantRef = ref(db, 'participants/')
+            const addParticipant = push(participantRef)
+            const name = playerRef.current.value
+            set(addParticipant,  {
+                name,
+                standingIndex : 0, 
+                totalScore: 0   ,
+                tournamentId: id,
+            }).then(err => {
+                console.log(err)
+            })
+        }
+
+    }
 
     return (
         <div className='tournament-participant-root'>
             <div className='tournament-participant'>
-                <form onSubmit={handleAdd} className='tournament-participant-add-member'>
+                <form className='tournament-participant-add-member'>
                     <input className='tournament-participant-text-box' 
                         type='text' 
                         placeholder='Player Name'
                         name='name'
                         value={name}
-                        onChange={onInputChange}/>
-                      
+                        onChange={onInputChange}
+                        ref={playerRef}/>
                     <Button
                         className='tournament-participant-button' 
                         color='secondary'
-                        onClick={handleAdd}
+                        onClick={handleAddPlayer}
                     >
                         ADD
                     </Button>
                 </form>
+                <span ref={errAddPlayer} className='err-'></span>
                 <div>
                     <TabsUnstyled defaultValue={0}>
                         <TabsList>
-                            <Tab>Player List</Tab>
+                            <Tab >Player List </Tab>
                             <Tab>Request list</Tab>
                         </TabsList>
-                        <TabPanel value={0}><PlayerList/></TabPanel>
+                        <TabPanel value={0} ><PlayerList/></TabPanel>
                         <TabPanel value={1}><RequestQueue/></TabPanel>
                     </TabsUnstyled>
                 </div>

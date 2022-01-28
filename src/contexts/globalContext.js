@@ -12,6 +12,7 @@ const AppContextProvider = ({ children }) => {
     const [tournaments, setTournaments] = React.useState('')
     const [matches, setMatches] = React.useState('')
     const [participants, setParticipants] = React.useState('')
+    const [ idParticipants, setIdParticipants] = React.useState('')
     const [games, setGames] = React.useState('')
     // const navigate = useNavigate()
     const [users, setUser] = React.useState('')
@@ -57,27 +58,27 @@ const AppContextProvider = ({ children }) => {
 
     const getParticipants = () => {
         get(child(dbRef, 'participants/')).then((snapshot) => {
-            if(snapshot.exists()){
+            if (snapshot.exists()) {
                 setParticipants(snapshot.val())
-            }else{
+            } else {
                 console.log('No data found')
             }
-        }).catch(err =>{
+        }).catch(err => {
             console.error('DB Error: ' + err)
         })
     }
-
-    const onDeleteParticipant = async (id) => {
-        if(window.confirm('Are you sure you want to delete')){
-            await  db().ref(`participants/${id}`).remove((err) => {
-                if(err) {
-                    console.log('DB Error: ' + err)
-                } else {
-                    console.log('Delete success')
-                }
+    
+    const getIdParticipants = () => {
+        get(child(dbRef, 'participants')).then((snapshot) => {
+            snapshot.forEach((participant) => {
+                setIdParticipants(participant.key)
             })
-        }
+        }).catch(err => {
+            console.error('DB Error: ' + err)
+        })
     }
+    
+
 
     const getSingleTournament = (tourId) =>{
         return tournaments?.find((item)=>item == tourId)
@@ -122,13 +123,14 @@ const AppContextProvider = ({ children }) => {
         getGames,
         getMatches,
         writeDataTable,
-        onDeleteParticipant,
         users,
         userLogged,
         tournaments,
         games,
         participants,
         matches,     
+        getIdParticipants,
+        idParticipants
     }
 
     return (
