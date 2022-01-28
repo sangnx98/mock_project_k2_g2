@@ -27,10 +27,10 @@ const TournamentCreate = () => {
     }, [])
     const keys = Object.keys(games)
     console.log(keys, 'keygame')
-    for (let index = 0; index < keys.length; index++) {
-        const element = keys[index]
-        console.log(element, 'element')
-    }
+    // for (let index = 0; index < keys.length; index++) {
+    //     const element = keys[index]
+    //     console.log(element, 'element')
+    // }
 
     const { register, handleSubmit, formState: { errors } } = useForm()
     const onSubmit = (data) => {
