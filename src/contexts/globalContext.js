@@ -15,7 +15,6 @@ const AppContextProvider = ({ children }) => {
     const [games, setGames] = React.useState('')
     // const navigate = useNavigate()
     const [users, setUser] = React.useState('')
-    const [tournaments, setTournaments] = React.useState('')
     const [userLogged, setUserLogged] = React.useState('null')
 
     const getTournaments = () =>{
@@ -117,21 +116,19 @@ const AppContextProvider = ({ children }) => {
     const AppContextData = {
         getTournaments,
         getSingleTournament,
-        writeDataTable,
         getUser,
         getUserLogged,
-        users,
-        userLogged,
-        tournaments,
         getParticipants, 
         getGames,
         getMatches,
+        writeDataTable,
+        onDeleteParticipant,
+        users,
+        userLogged,
         tournaments,
         games,
         participants,
-        matches,
-        onDeleteParticipant,
-     
+        matches,     
     }
 
     return (
