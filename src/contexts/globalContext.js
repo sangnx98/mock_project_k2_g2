@@ -9,6 +9,8 @@ export const AppContext = createContext()
 
 // eslint-disable-next-line react/prop-types
 const AppContextProvider = ({ children }) => {
+    const [tournaments, setTournaments] = React.useState('')
+    const [matches, setMatches] = React.useState('')
     const [participants, setParticipants] = React.useState('')
     const [games, setGames] = React.useState('')
     // const navigate = useNavigate()
@@ -39,6 +41,19 @@ const AppContextProvider = ({ children }) => {
             console.error('DB Error: ' + err)
         })
     }
+
+    const getMatches = () =>{
+        get(child(dbRef, 'matches/')).then((snapshot)=>{
+            if(snapshot.exists()){
+                setMatches(snapshot.val())
+            } else{
+                console.log('No data found')
+            }
+        }).catch(err =>{
+            console.error('DB Error: ' + err)
+        })
+    }
+
 
 
     const getParticipants = () => {
@@ -110,8 +125,11 @@ const AppContextProvider = ({ children }) => {
         tournaments,
         getParticipants, 
         getGames,
+        getMatches,
+        tournaments,
         games,
         participants,
+        matches,
         onDeleteParticipant,
      
     }

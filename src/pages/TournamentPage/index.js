@@ -18,8 +18,6 @@ import React, {useContext, useEffect} from 'react'
 import { AppContext } from '../../contexts/globalContext'
 import { useParams } from 'react-router-dom'
 
-
-
 const styles = {
     tab: {
         color: '#fff'
@@ -63,13 +61,11 @@ function a11yProps(index) {
 export default function TournamentPage() {
     const { id } = useParams()
     const [value, setValue] = React.useState(0)
-    const { tournaments, getTournaments,  } = useContext(AppContext)
+    const { tournaments, getTournaments } = useContext(AppContext)
 
     useEffect(() => {
         getTournaments()
-
     },[])
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -168,7 +164,7 @@ export default function TournamentPage() {
                 </Box>
                 <Box className='tournament-page-tabs'>
                     <TabPanel value={value} index={0}>
-                        <Bracket tournamentId={id} format={tournaments[id].format}/>
+                        <Bracket tournamentId={id}/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         <MatchHistory/>
